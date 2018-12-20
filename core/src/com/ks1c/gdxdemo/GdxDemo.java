@@ -1,7 +1,7 @@
 package com.ks1c.gdxdemo;
 
 import com.badlogic.gdx.Game;
-import com.ks1c.gdxdemo.screens.GenericScreen;
+import com.ks1c.gdxdemo.screens.GameScreen;
 
 public class GdxDemo extends Game {
 
@@ -11,6 +11,6 @@ public class GdxDemo extends Game {
     @Override
     public void create() {
 
-        setScreen(new GenericScreen());
+        setScreen(new GameScreen());
     }
 }
