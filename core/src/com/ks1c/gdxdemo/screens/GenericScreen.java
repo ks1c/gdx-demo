@@ -68,8 +68,8 @@ public class GenericScreen extends ScreenAdapter {
             font.draw(
                     batch,
                     Gdx.graphics.getFramesPerSecond() + "\n" + DMsg.show(),
-                    cam.position.x - GdxDemo.GAME_WIDTH / 2,
-                    cam.position.y + GdxDemo.GAME_HEIGHT / 2
+                    updateX(0),
+                    updateY(GdxDemo.GAME_HEIGHT)
             );
         }
 
@@ -92,5 +92,15 @@ public class GenericScreen extends ScreenAdapter {
 
     boolean isDebugModeEnabled() {
         return debugMode;
+    }
+
+    public float updateX(float x) {
+
+        return cam.position.x - GdxDemo.GAME_WIDTH / 2 + x;
+    }
+
+    public float updateY(float y) {
+
+        return cam.position.y - GdxDemo.GAME_HEIGHT / 2 + y;
     }
 }
