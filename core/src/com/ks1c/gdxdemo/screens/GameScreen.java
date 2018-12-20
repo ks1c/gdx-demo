@@ -94,9 +94,8 @@ public class GameScreen extends GenericScreen {
 
         //DEAD_ZONE
         shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.rect(Player.DEAD_ZONE.x, Player.DEAD_ZONE.y, Player.DEAD_ZONE.width, Player.DEAD_ZONE.height);
-        shapeRenderer.rect(0, Player.DEAD_ZONE.y, GdxDemo.GAME_WIDTH, Player.DEAD_ZONE.height);
-        shapeRenderer.rect(Player.DEAD_ZONE.x, 0, Player.DEAD_ZONE.width, GdxDemo.GAME_HEIGHT);
+        shapeRenderer.rect(updateX(0), updateY(Player.DEAD_ZONE.y), GdxDemo.GAME_WIDTH, Player.DEAD_ZONE.height);
+        shapeRenderer.rect(updateX(Player.DEAD_ZONE.x), updateY(0), Player.DEAD_ZONE.width, GdxDemo.GAME_HEIGHT);
 
         //BOUNDING BOX
         shapeRenderer.setColor(Color.BLUE);
