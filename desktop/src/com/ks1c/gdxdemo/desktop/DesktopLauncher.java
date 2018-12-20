@@ -9,7 +9,7 @@ public class DesktopLauncher {
 
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
-        config.title = "Prototype";
+        config.title = "gdx-demo";
         config.width = 960;
         config.height = 540;
 
