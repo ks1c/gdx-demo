@@ -1,7 +1,7 @@
 <root>
 	<world>
 		<tiledMap>
-			start2.tmx
+			start.tmx
 		</tiledMap>
 		<waypoint>
 			start
