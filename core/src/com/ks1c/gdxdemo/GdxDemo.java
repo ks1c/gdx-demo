@@ -8,9 +8,11 @@ public class GdxDemo extends Game {
     public static final int GAME_HEIGHT = 540;
     public static final int GAME_WIDTH = 960;
 
+    public final SaveGame saveGame = new SaveGame();
+
     @Override
     public void create() {
 
-        setScreen(new GameScreen());
+        setScreen(new GameScreen(this));
     }
 }

@@ -12,28 +12,35 @@ import com.badlogic.gdx.math.Vector2;
 
 public class World {
 
-    private SaveGame saveGame;
     public TiledMap tiledMap;
     private final OrthogonalTiledMapRenderer levelRenderer;
     private MapObjects entities;
 
-    public World(Player player, SaveGame saveGame) {
+    public World(Player player) {
 
-        this.saveGame = saveGame;
         tiledMap = null;
         levelRenderer = new OrthogonalTiledMapRenderer(null);
     }
 
-    public void init() {
+    public void init(String mapName) {
 
-        loadTiledMap(saveGame.world.get("tiledMap"));
+        loadTiledMap(mapName);
     }
 
-    private void loadTiledMap(String mapName) {
+    public void loadTiledMap(String mapName) {
 
         tiledMap = new TmxMapLoader().load(mapName);
         levelRenderer.setMap(tiledMap);
         entities = tiledMap.getLayers().get("entities").getObjects();
+    }
+
+    public void setWaypoint(String waypoint) {
+        //tiledMap.getProperties().
+    }
+
+    public String getWaypoint() {
+
+        return tiledMap.getProperties().get("waypoint").toString();
     }
 
     public void render(OrthographicCamera cam) {

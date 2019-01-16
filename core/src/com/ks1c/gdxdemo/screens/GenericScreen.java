@@ -17,8 +17,11 @@ public class GenericScreen extends ScreenAdapter {
     protected final OrthographicCamera cam;
     private final BitmapFont font;
     private boolean debugMode = false;
+    public GdxDemo game;
 
-    public GenericScreen() {
+    public GenericScreen(GdxDemo game) {
+
+        this.game = game;
 
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();

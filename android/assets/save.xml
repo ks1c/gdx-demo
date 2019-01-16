@@ -1,8 +1,10 @@
 <root>
 	<world>
-		<tiledMap>start.tmx</tiledMap>
+		<tiledMap>
+			start2.tmx
+		</tiledMap>
+		<waypoint>
+			start
+		</waypoint>
 	</world>
-	<player>
-		<waypoint>start</waypoint>
-	</player>
 </root>

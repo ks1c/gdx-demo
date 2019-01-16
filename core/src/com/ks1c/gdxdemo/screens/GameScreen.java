@@ -3,7 +3,9 @@ package com.ks1c.gdxdemo.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.ks1c.gdxdemo.DMsg;
 import com.ks1c.gdxdemo.Player;
 import com.ks1c.gdxdemo.GdxDemo;
 import com.ks1c.gdxdemo.SaveGame;
@@ -15,27 +17,40 @@ public class GameScreen extends GenericScreen {
     private final Player player;
 
 
-    public GameScreen() {
+    public GameScreen(GdxDemo game) {
+        super(game);
 
         player = new Player();
-        world = new World(player, new SaveGame());
+        world = new World(player);
     }
 
     @Override
     public void show() {
 
         enableDebugMode();
-        world.init();
+
+        if (game.saveGame.exists()) {
+
+            game.saveGame.loadFile();
+            world.loadTiledMap(game.saveGame.getMapName());
+            world.setWaypoint(game.saveGame.getWaypoint());
+        } else {
+
+            world.loadTiledMap(game.saveGame.getMapName());
+            game.saveGame.setWaypoint(world.getWaypoint());
+            game.saveGame.saveFile();
+        }
+
         setCameraAndPlayerPosition();
     }
 
     @Override
     public void update() {
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            cam.translate(0, 5);
+            cam.translate(0, -5);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            cam.translate(0, -5);
+            cam.translate(0, 5);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             cam.translate(5, 0);

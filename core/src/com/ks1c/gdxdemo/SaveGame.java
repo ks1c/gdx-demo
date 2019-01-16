@@ -10,65 +10,68 @@ import java.io.StringWriter;
 
 public class SaveGame {
 
-    XmlReader.Element root, world, player;
+    private XmlReader.Element root, world;
 
     public SaveGame() {
 
-        if (Gdx.files.local("save.xml").exists()) {
-            loadFile();
-        } else {
-            saveFile();
+        StringWriter writer = new StringWriter();
+        XmlWriter xmlWriter = new XmlWriter(writer);
+
+        try {
+
+            xmlWriter.element("root");
+
+            xmlWriter.element("world");
+
+            xmlWriter.element("tiledMap", "start.tmx");
+
+            xmlWriter.element("waypoint", "default");
+
+            xmlWriter.pop();
+
+            xmlWriter.pop();
+
+            xmlWriter.close();
+
+            XmlReader xmlReader = new XmlReader();
+            root = xmlReader.parse(writer.toString());
+            world = root.getChildByName("world");
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    private void loadFile() {
+    public void loadFile() {
 
         FileHandle saveFile;
         saveFile = Gdx.files.local("save.xml");
         XmlReader xmlReader = new XmlReader();
         root = xmlReader.parse(saveFile);
         world = root.getChildByName("world");
-        player = root.getChildByName("player");
     }
 
-    private void saveFile() {
+    public boolean exists() {
 
+        return Gdx.files.local("save.xml").exists();
+    }
+
+    public void saveFile() {
         FileHandle saveFile = Gdx.files.local("save.xml");
-        StringWriter writer = new StringWriter();
-        XmlWriter xmlWriter = new XmlWriter(writer);
+        saveFile.writeString(root.toString(), false);
+    }
 
-        try {
+    public String getMapName() {
 
-            //BEGIN SAVE
-            xmlWriter.element("root");
+        return world.getChildByName("tiledMap").getText();
+    }
 
-            //BEGIN WORLD
-            xmlWriter.element("world");
+    public void setWaypoint(String waypoint) {
+        world.getChildByName("waypoint").setText(waypoint);
+    }
 
-            xmlWriter.element("tiledMap", "start.tmx");
+    public String getWaypoint() {
 
-            //END WORLD
-            xmlWriter.pop();
-
-            //BEGIN PLAYER
-            xmlWriter.element("player");
-
-            xmlWriter.element("waypoint", "start");
-
-            //END PLAYER
-            xmlWriter.pop();
-
-            //END SAVE
-            xmlWriter.pop();
-
-            xmlWriter.close();
-
-            saveFile.writeString(writer.toString(), false);
-            xmlWriter.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        loadFile();
+        return world.getChildByName("waypoint").toString();
     }
 }
