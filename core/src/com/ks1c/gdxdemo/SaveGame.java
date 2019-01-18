@@ -51,14 +51,14 @@ public class SaveGame {
         world = root.getChildByName("world");
     }
 
-    public boolean exists() {
-
-        return Gdx.files.local("save.xml").exists();
-    }
-
     public void saveFile() {
         FileHandle saveFile = Gdx.files.local("save.xml");
         saveFile.writeString(root.toString(), false);
+    }
+
+    public boolean exists() {
+
+        return Gdx.files.local("save.xml").exists();
     }
 
     public String getMapName() {
