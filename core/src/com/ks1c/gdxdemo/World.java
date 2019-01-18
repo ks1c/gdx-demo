@@ -23,11 +23,6 @@ public class World {
         mapRenderer = new OrthogonalTiledMapRenderer(null);
     }
 
-    public void init(String mapName) {
-
-        loadTiledMap(mapName);
-    }
-
     public void loadTiledMap(String mapName) {
 
         tiledMap = new TmxMapLoader().load(mapName);
@@ -38,10 +33,6 @@ public class World {
     public RectangleMapObject getEntity(String name) {
 
         return (RectangleMapObject) entities.get(name);
-    }
-
-    public void setWaypoint(String waypoint) {
-        //tiledMap.getProperties().
     }
 
     public String getWaypoint() {

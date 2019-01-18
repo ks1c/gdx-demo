@@ -33,7 +33,6 @@ public class GameScreen extends GenericScreen {
 
             game.saveGame.loadFile();
             world.loadTiledMap(game.saveGame.getMapName());
-            world.setWaypoint(game.saveGame.getWaypoint());
         } else {
 
             world.loadTiledMap(game.saveGame.getMapName());
