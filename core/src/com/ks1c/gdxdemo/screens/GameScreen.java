@@ -73,9 +73,9 @@ public class GameScreen extends GenericScreen {
 
     private void setCameraAndPlayerPosition() {
 
-        Vector2 origin = world.getOrigin();
-
         Vector2 camPos = new Vector2();
+
+        Vector2 origin = world.getEntity(game.saveGame.getWaypoint()).getRectangle().getCenter(new Vector2());
 
         //ZERA CAMERA
         camPos.add(-GdxDemo.GAME_WIDTH / 2f, -GdxDemo.GAME_HEIGHT / 2f);
