@@ -12,8 +12,8 @@ public class Player extends Rectangle {
 
 
     static final public Rectangle DEAD_ZONE = new Rectangle(
-            GdxDemo.GAME_WIDTH / 2 - WIDTH / 2,
-            GdxDemo.GAME_HEIGHT / 2 - HEIGHT / 2,
+            GdxDemo.GAME_WIDTH / 2f - WIDTH / 2,
+            GdxDemo.GAME_HEIGHT / 2f - HEIGHT / 2,
             WIDTH,
             HEIGHT
     );
