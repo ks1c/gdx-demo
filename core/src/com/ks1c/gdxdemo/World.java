@@ -13,13 +13,13 @@ import com.badlogic.gdx.math.Vector2;
 public class World {
 
     public TiledMap tiledMap;
-    private final OrthogonalTiledMapRenderer levelRenderer;
+    private final OrthogonalTiledMapRenderer mapRenderer;
     private MapObjects entities;
 
     public World(Player player) {
 
         tiledMap = null;
-        levelRenderer = new OrthogonalTiledMapRenderer(null);
+        mapRenderer = new OrthogonalTiledMapRenderer(null);
     }
 
     public void init(String mapName) {
@@ -30,7 +30,7 @@ public class World {
     public void loadTiledMap(String mapName) {
 
         tiledMap = new TmxMapLoader().load(mapName);
-        levelRenderer.setMap(tiledMap);
+        mapRenderer.setMap(tiledMap);
         entities = tiledMap.getLayers().get("entities").getObjects();
     }
 
@@ -45,8 +45,8 @@ public class World {
 
     public void render(OrthographicCamera cam) {
 
-        levelRenderer.setView(cam);
-        levelRenderer.render();
+        mapRenderer.setView(cam);
+        mapRenderer.render();
     }
 
     public Vector2 getOrigin() {
