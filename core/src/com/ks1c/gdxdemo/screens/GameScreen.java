@@ -3,12 +3,9 @@ package com.ks1c.gdxdemo.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-import com.ks1c.gdxdemo.DMsg;
 import com.ks1c.gdxdemo.Player;
 import com.ks1c.gdxdemo.GdxDemo;
-import com.ks1c.gdxdemo.SaveGame;
 import com.ks1c.gdxdemo.World;
 
 public class GameScreen extends GenericScreen {
@@ -36,7 +33,7 @@ public class GameScreen extends GenericScreen {
         } else {
 
             world.loadTiledMap(game.saveGame.getMapName());
-            game.saveGame.setWaypoint(world.getWaypoint());
+            game.saveGame.setWaypoint(world.getOrigin());
             game.saveGame.saveFile();
         }
 

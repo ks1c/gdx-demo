@@ -35,9 +35,9 @@ public class World {
         return (RectangleMapObject) entities.get(name);
     }
 
-    public String getWaypoint() {
+    public String getOrigin() {
 
-        return tiledMap.getProperties().get("waypoint").toString();
+        return tiledMap.getProperties().get("origin").toString();
     }
 
     public void render(OrthographicCamera cam) {
