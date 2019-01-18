@@ -1,6 +1,7 @@
 package com.ks1c.gdxdemo;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -32,6 +33,11 @@ public class World {
         tiledMap = new TmxMapLoader().load(mapName);
         mapRenderer.setMap(tiledMap);
         entities = tiledMap.getLayers().get("entities").getObjects();
+    }
+
+    public MapObject getEntity(String name) {
+
+        return entities.get(name);
     }
 
     public void setWaypoint(String waypoint) {
