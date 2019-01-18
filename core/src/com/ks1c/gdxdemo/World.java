@@ -46,13 +46,6 @@ public class World {
         mapRenderer.render();
     }
 
-    public Vector2 getOrigin() {
-
-        RectangleMapObject origin = (RectangleMapObject) entities.get(tiledMap.getProperties().get("waypoint").toString());
-
-        return origin.getRectangle().getCenter(new Vector2());
-    }
-
     public float getWidth() {
 
         TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
