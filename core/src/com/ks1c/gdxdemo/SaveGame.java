@@ -72,6 +72,6 @@ public class SaveGame {
 
     public String getWaypoint() {
 
-        return world.getChildByName("waypoint").toString();
+        return world.getChildByName("waypoint").getText();
     }
 }
