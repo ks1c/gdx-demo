@@ -35,9 +35,9 @@ public class World {
         entities = tiledMap.getLayers().get("entities").getObjects();
     }
 
-    public MapObject getEntity(String name) {
+    public RectangleMapObject getEntity(String name) {
 
-        return entities.get(name);
+        return (RectangleMapObject) entities.get(name);
     }
 
     public void setWaypoint(String waypoint) {
