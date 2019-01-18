@@ -78,23 +78,23 @@ public class GameScreen extends GenericScreen {
         Vector2 camPos = new Vector2();
 
         //ZERA CAMERA
-        camPos.add(-GdxDemo.GAME_WIDTH / 2, -GdxDemo.GAME_HEIGHT / 2);
+        camPos.add(-GdxDemo.GAME_WIDTH / 2f, -GdxDemo.GAME_HEIGHT / 2f);
 
-        if (origin.x < GdxDemo.GAME_WIDTH / 2) {
-            camPos.add(GdxDemo.GAME_WIDTH / 2, 0);
+        if (origin.x < GdxDemo.GAME_WIDTH / 2f) {
+            camPos.add(GdxDemo.GAME_WIDTH / 2f, 0);
 
-        } else if (origin.x > world.getWidth() - GdxDemo.GAME_WIDTH / 2) {
-            camPos.add(world.getWidth() - GdxDemo.GAME_WIDTH / 2, 0);
+        } else if (origin.x > world.getWidth() - GdxDemo.GAME_WIDTH / 2f) {
+            camPos.add(world.getWidth() - GdxDemo.GAME_WIDTH / 2f, 0);
 
         } else {
             camPos.add(origin.x, 0);
         }
 
-        if (origin.y > world.getHeight() - GdxDemo.GAME_HEIGHT / 2) {
-            camPos.add(0, world.getHeight() - GdxDemo.GAME_HEIGHT / 2);
+        if (origin.y > world.getHeight() - GdxDemo.GAME_HEIGHT / 2f) {
+            camPos.add(0, world.getHeight() - GdxDemo.GAME_HEIGHT / 2f);
 
-        } else if (origin.y < GdxDemo.GAME_HEIGHT / 2) {
-            camPos.add(0, GdxDemo.GAME_HEIGHT / 2);
+        } else if (origin.y < GdxDemo.GAME_HEIGHT / 2f) {
+            camPos.add(0, GdxDemo.GAME_HEIGHT / 2f);
 
         } else {
             camPos.add(0, origin.y);
