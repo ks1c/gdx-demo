@@ -30,22 +30,22 @@ public class Player extends Rectangle {
 
     public float moveRight() {
 
-        return 0;
+        return -5f;
     }
 
     public float moveLeft() {
 
-        return 0;
+        return 5f;
     }
 
     public float moveUp() {
 
-        return 0;
+        return -5f;
     }
 
     public float moveDown() {
 
-        return 0;
+        return 5f;
     }
 
     public void render(SpriteBatch batch) {
