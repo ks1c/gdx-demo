@@ -28,6 +28,26 @@ public class Player extends Rectangle {
     public void init() {
     }
 
+    public float moveRight() {
+
+        return 0;
+    }
+
+    public float moveLeft() {
+
+        return 0;
+    }
+
+    public float moveUp() {
+
+        return 0;
+    }
+
+    public float moveDown() {
+
+        return 0;
+    }
+
     public void render(SpriteBatch batch) {
         sprite.setAlpha(0);
         batch.draw(sprite, x, y);
