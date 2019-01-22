@@ -16,6 +16,7 @@ public class World {
     public TiledMap tiledMap;
     private final OrthogonalTiledMapRenderer mapRenderer;
     private MapObjects entities;
+    public float width, height;
 
     public World(Player player) {
 
@@ -28,6 +29,10 @@ public class World {
         tiledMap = new TmxMapLoader().load(mapName);
         mapRenderer.setMap(tiledMap);
         entities = tiledMap.getLayers().get("entities").getObjects();
+
+        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
+        width = layer.getWidth() * layer.getTileWidth();
+        height = layer.getHeight() * layer.getTileHeight();
     }
 
     public RectangleMapObject getEntity(String name) {
@@ -44,19 +49,5 @@ public class World {
 
         mapRenderer.setView(cam);
         mapRenderer.render();
-    }
-
-    public float getWidth() {
-
-        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
-
-        return layer.getWidth() * layer.getTileWidth();
-    }
-
-    public float getHeight() {
-
-        TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
-
-        return layer.getHeight() * layer.getTileHeight();
     }
 }
