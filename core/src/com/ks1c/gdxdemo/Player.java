@@ -4,11 +4,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 public class Player extends Rectangle {
 
     static final public float WIDTH = 32;
     static final public float HEIGHT = 32;
+
+    private Vector2 displacement;
 
 
     static final public Rectangle DEAD_ZONE = new Rectangle(
@@ -23,29 +27,38 @@ public class Player extends Rectangle {
     public Player() {
         super(0, 0, WIDTH, HEIGHT);
         sprite = new Sprite(new Texture("player.png"));
+        displacement = new Vector2(5f, 5f);
     }
 
     public void init() {
     }
 
-    public float moveRight() {
+    public float moveRight(Vector3 camPos) {
 
-        return -5f;
+        addX(-displacement.x);
+
+        return -displacement.x;
     }
 
-    public float moveLeft() {
+    public float moveLeft(Vector3 camPos) {
 
-        return 5f;
+        addX(displacement.x);
+
+        return displacement.x;
     }
 
-    public float moveUp() {
+    public float moveUp(Vector3 camPos) {
 
-        return -5f;
+        addY(-displacement.y);
+
+        return -displacement.y;
     }
 
-    public float moveDown() {
+    public float moveDown(Vector3 camPos) {
 
-        return 5f;
+        addY(displacement.y);
+
+        return displacement.y;
     }
 
     public void render(SpriteBatch batch) {
