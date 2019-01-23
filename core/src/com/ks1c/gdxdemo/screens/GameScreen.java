@@ -64,7 +64,7 @@ public class GameScreen extends GenericScreen {
 
     @Override
     public void renderBackGroungTiles() {
-        if (world.tiledMap != null) world.render(cam);
+        if (world.getTiledMap() != null) world.render(cam);
     }
 
     private void setCameraAndPlayerPosition() {

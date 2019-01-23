@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class World {
 
-    public TiledMap tiledMap;
+    private TiledMap tiledMap;
     private final OrthogonalTiledMapRenderer mapRenderer;
     private MapObjects entities;
     private float width, height;
@@ -46,6 +46,10 @@ public class World {
 
     public float getHeight() {
         return height;
+    }
+
+    public TiledMap getTiledMap() {
+        return tiledMap;
     }
 
     public String getOrigin() {
