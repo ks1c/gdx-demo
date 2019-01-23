@@ -33,28 +33,28 @@ public class Player extends Rectangle {
     public void init() {
     }
 
-    public float moveRight(Vector3 camPos) {
+    public float moveRight(Vector3 camPos, float worldWidth) {
 
         addX(displacement.x);
 
         return displacement.x;
     }
 
-    public float moveLeft(Vector3 camPos) {
+    public float moveLeft(Vector3 camPos, float worldWidth) {
 
         addX(-displacement.x);
 
         return -displacement.x;
     }
 
-    public float moveUp(Vector3 camPos) {
+    public float moveUp(Vector3 camPos, float worldHeight) {
 
         addY(displacement.y);
 
         return displacement.y;
     }
 
-    public float moveDown(Vector3 camPos) {
+    public float moveDown(Vector3 camPos, float worldHeight) {
 
         addY(-displacement.y);
 
