@@ -35,30 +35,30 @@ public class Player extends Rectangle {
 
     public float moveRight(Vector3 camPos) {
 
-        addX(-displacement.x);
-
-        return -displacement.x;
-    }
-
-    public float moveLeft(Vector3 camPos) {
-
         addX(displacement.x);
 
         return displacement.x;
     }
 
-    public float moveUp(Vector3 camPos) {
+    public float moveLeft(Vector3 camPos) {
 
-        addY(-displacement.y);
+        addX(-displacement.x);
 
-        return -displacement.y;
+        return -displacement.x;
     }
 
-    public float moveDown(Vector3 camPos) {
+    public float moveUp(Vector3 camPos) {
 
         addY(displacement.y);
 
         return displacement.y;
+    }
+
+    public float moveDown(Vector3 camPos) {
+
+        addY(-displacement.y);
+
+        return -displacement.y;
     }
 
     public void render(SpriteBatch batch) {
