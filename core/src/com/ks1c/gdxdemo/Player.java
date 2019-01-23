@@ -35,28 +35,43 @@ public class Player extends Rectangle {
 
     public float moveRight(Vector3 camPos, float worldWidth) {
 
-        addX(displacement.x);
+//        if (camPos.x < worldWidth - GdxDemo.GAME_WIDTH / 2) {
+//            if (x < DEAD_ZONE.x) {
+//                addToX(displacement.x);
+//                if (x > DEAD_ZONE.x) {
+//                    x = DEAD_ZONE.x;
+//                }
+//                return 0;
+//            } else {
+//                addToX(-displacement.x);
+//                return displacement.x;
+//            }
+//        } else {
+//            addToX(displacement.x);
+//            return 0;
+//        }
+        addToX(displacement.x);
 
         return displacement.x;
     }
 
     public float moveLeft(Vector3 camPos, float worldWidth) {
 
-        addX(-displacement.x);
+        addToX(-displacement.x);
 
         return -displacement.x;
     }
 
     public float moveUp(Vector3 camPos, float worldHeight) {
 
-        addY(displacement.y);
+        addToY(displacement.y);
 
         return displacement.y;
     }
 
     public float moveDown(Vector3 camPos, float worldHeight) {
 
-        addY(-displacement.y);
+        addToY(-displacement.y);
 
         return -displacement.y;
     }
@@ -66,11 +81,29 @@ public class Player extends Rectangle {
         batch.draw(sprite, x, y);
     }
 
-    public void addX(float x) {
+    private void addToX(float x) {
         setPosition(getX() + x, getY());
     }
 
-    public void addY(float y) {
+    private void addToY(float y) {
         setPosition(getX(), getY() + y);
+    }
+
+    public float getXOnScreen(Vector3 camPos) {
+
+        if (x < camPos.x) {
+            return (GdxDemo.GAME_WIDTH / 2f - (camPos.x - x));
+        } else if (x > camPos.x) {
+            return ((GdxDemo.GAME_WIDTH / 2f) + (x - camPos.x));
+        } else return GdxDemo.GAME_WIDTH / 2f;
+    }
+
+    public float getYOnScreen(Vector3 camPos) {
+
+        if (y < camPos.y) {
+            return (GdxDemo.GAME_HEIGHT / 2f - (camPos.y - y));
+        } else if (y > camPos.y) {
+            return ((GdxDemo.GAME_HEIGHT / 2f) + (y - camPos.y));
+        } else return GdxDemo.GAME_HEIGHT / 2f;
     }
 }
