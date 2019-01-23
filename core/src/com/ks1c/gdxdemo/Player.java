@@ -27,7 +27,7 @@ public class Player extends Rectangle {
     public Player() {
         super(0, 0, WIDTH, HEIGHT);
         sprite = new Sprite(new Texture("player.png"));
-        displacement = new Vector2(5f, 5f);
+        displacement = new Vector2(1000f, 5f);
     }
 
     public void init() {
@@ -35,24 +35,30 @@ public class Player extends Rectangle {
 
     public float moveRight(Vector3 camPos, float worldWidth) {
 
-//        if (camPos.x < worldWidth - GdxDemo.GAME_WIDTH / 2) {
-//            if (x < DEAD_ZONE.x) {
-//                addToX(displacement.x);
-//                if (x > DEAD_ZONE.x) {
-//                    x = DEAD_ZONE.x;
-//                }
-//                return 0;
-//            } else {
-//                addToX(-displacement.x);
-//                return displacement.x;
-//            }
-//        } else {
-//            addToX(displacement.x);
-//            return 0;
-//        }
-        addToX(displacement.x);
+        if (camPos.x < worldWidth - GdxDemo.GAME_WIDTH / 2f) {
+            if (getXOnScreen(camPos) < DEAD_ZONE.x) {
+                addToX(displacement.x);
+                if (getXOnScreen(camPos) > DEAD_ZONE.x) {
+                    x = camPos.x - DEAD_ZONE.width / 2f;
+                }
+                return 0;
+            } else {
 
-        return displacement.x;
+                if (camPos.x + displacement.x < worldWidth - GdxDemo.GAME_WIDTH / 2f) {
+                    addToX(displacement.x);
+                    return displacement.x;
+                } else {
+                    addToX(displacement.x - ((camPos.x + displacement.x) - (worldWidth - GdxDemo.GAME_WIDTH / 2f)));
+                    return (displacement.x - ((camPos.x + displacement.x) - (worldWidth - GdxDemo.GAME_WIDTH / 2f)));
+                }
+            }
+        } else {
+            addToX(displacement.x);
+            if (x + width > worldWidth) {
+                x = worldWidth - width;
+            }
+            return 0;
+        }
     }
 
     public float moveLeft(Vector3 camPos, float worldWidth) {
