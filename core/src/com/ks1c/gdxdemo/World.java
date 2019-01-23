@@ -16,7 +16,7 @@ public class World {
     public TiledMap tiledMap;
     private final OrthogonalTiledMapRenderer mapRenderer;
     private MapObjects entities;
-    public float width, height;
+    private float width, height;
 
     public World(Player player) {
 
@@ -38,6 +38,14 @@ public class World {
     public RectangleMapObject getEntity(String name) {
 
         return (RectangleMapObject) entities.get(name);
+    }
+
+    public float getWidth() {
+        return width;
+    }
+
+    public float getHeight() {
+        return height;
     }
 
     public String getOrigin() {

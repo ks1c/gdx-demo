@@ -79,15 +79,15 @@ public class GameScreen extends GenericScreen {
         if (origin.x < GdxDemo.GAME_WIDTH / 2f) {
             camPos.add(GdxDemo.GAME_WIDTH / 2f, 0);
 
-        } else if (origin.x > world.width - GdxDemo.GAME_WIDTH / 2f) {
-            camPos.add(world.width - GdxDemo.GAME_WIDTH / 2f, 0);
+        } else if (origin.x > world.getWidth() - GdxDemo.GAME_WIDTH / 2f) {
+            camPos.add(world.getWidth() - GdxDemo.GAME_WIDTH / 2f, 0);
 
         } else {
             camPos.add(origin.x, 0);
         }
 
-        if (origin.y > world.height - GdxDemo.GAME_HEIGHT / 2f) {
-            camPos.add(0, world.height - GdxDemo.GAME_HEIGHT / 2f);
+        if (origin.y > world.getHeight() - GdxDemo.GAME_HEIGHT / 2f) {
+            camPos.add(0, world.getHeight() - GdxDemo.GAME_HEIGHT / 2f);
 
         } else if (origin.y < GdxDemo.GAME_HEIGHT / 2f) {
             camPos.add(0, GdxDemo.GAME_HEIGHT / 2f);
