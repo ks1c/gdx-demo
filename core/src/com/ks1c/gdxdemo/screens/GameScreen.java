@@ -36,7 +36,6 @@ public class GameScreen extends GenericScreen {
             game.saveGame.setWaypoint(world.getOrigin());
             game.saveGame.saveFile();
         }
-
         setCameraAndPlayerPosition();
     }
 
@@ -64,7 +63,7 @@ public class GameScreen extends GenericScreen {
 
     @Override
     public void renderBackGroungTiles() {
-        if (world.getTiledMap() != null) world.render(cam);
+        world.render(cam);
     }
 
     private void setCameraAndPlayerPosition() {

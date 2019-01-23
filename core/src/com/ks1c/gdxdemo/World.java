@@ -48,10 +48,6 @@ public class World {
         return height;
     }
 
-    public TiledMap getTiledMap() {
-        return tiledMap;
-    }
-
     public String getOrigin() {
 
         return tiledMap.getProperties().get("origin").toString();
