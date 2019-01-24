@@ -35,21 +35,22 @@ public class Player extends Rectangle {
 
     public float moveRight(Vector3 camPos, float worldWidth) {
 
-        if (camPos.x < worldWidth - GdxDemo.GAME_WIDTH / 2f) {
+        float camPosXMax = worldWidth - GdxDemo.GAME_WIDTH / 2f;
+
+        if (camPos.x < camPosXMax) {
             if (getXOnScreen(camPos) < DEAD_ZONE.x) {
                 addToX(displacement.x);
                 if (getXOnScreen(camPos) > DEAD_ZONE.x) {
-                    x = camPos.x - DEAD_ZONE.width / 2f;
+                    x = DEAD_ZONE.x;
                 }
                 return 0;
             } else {
-
-                if (camPos.x + displacement.x < worldWidth - GdxDemo.GAME_WIDTH / 2f) {
+                if (camPos.x + displacement.x < camPosXMax) {
                     addToX(displacement.x);
                     return displacement.x;
                 } else {
-                    addToX(displacement.x - ((camPos.x + displacement.x) - (worldWidth - GdxDemo.GAME_WIDTH / 2f)));
-                    return (displacement.x - ((camPos.x + displacement.x) - (worldWidth - GdxDemo.GAME_WIDTH / 2f)));
+                    addToX(camPosXMax - camPos.x);
+                    return (camPosXMax - camPos.x);
                 }
             }
         } else {
@@ -95,7 +96,7 @@ public class Player extends Rectangle {
         setPosition(getX(), getY() + y);
     }
 
-    public float getXOnScreen(Vector3 camPos) {
+    private float getXOnScreen(Vector3 camPos) {
 
         if (x < camPos.x) {
             return (GdxDemo.GAME_WIDTH / 2f - (camPos.x - x));
