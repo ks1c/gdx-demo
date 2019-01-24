@@ -150,8 +150,8 @@ public class Player extends Rectangle {
     }
 
     public void render(SpriteBatch batch) {
-        sprite.setAlpha(0);
-        batch.draw(sprite, x, y);
+        //sprite.setAlpha(0);
+        //batch.draw(sprite, x, y);
     }
 
     private void addToX(float x) {
