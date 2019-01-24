@@ -27,7 +27,7 @@ public class Player extends Rectangle {
     public Player() {
         super(0, 0, WIDTH, HEIGHT);
         sprite = new Sprite(new Texture("player.png"));
-        displacement = new Vector2(10f, 5f);
+        displacement = new Vector2(1000f, 1000f);
     }
 
     public void init() {
@@ -93,16 +93,60 @@ public class Player extends Rectangle {
 
     public float moveUp(Vector3 camPos, float worldHeight) {
 
-        addToY(displacement.y);
+        float camPosYMax = worldHeight - GdxDemo.GAME_HEIGHT / 2f;
 
-        return displacement.y;
+        if (camPos.y < camPosYMax) {
+            if (getYOnScreen(camPos) < DEAD_ZONE.y) {
+                addToY(displacement.y);
+                if (getYOnScreen(camPos) > DEAD_ZONE.y) {
+                    y = DEAD_ZONE.y;
+                }
+                return 0;
+            } else {
+                if (camPos.y + displacement.y < camPosYMax) {
+                    addToY(displacement.y);
+                    return displacement.y;
+                } else {
+                    addToY(camPosYMax - camPos.y);
+                    return (camPosYMax - camPos.y);
+                }
+            }
+        } else {
+            addToY(displacement.y);
+            if (y + height > worldHeight) {
+                y = worldHeight - height;
+            }
+            return 0;
+        }
     }
 
     public float moveDown(Vector3 camPos, float worldHeight) {
 
-        addToY(-displacement.y);
+        float camPosYMin = GdxDemo.GAME_HEIGHT / 2f;
 
-        return -displacement.y;
+        if (camPos.y > camPosYMin) {
+            if (getYOnScreen(camPos) > DEAD_ZONE.y) {
+                addToY(-displacement.y);
+                if (getYOnScreen(camPos) < DEAD_ZONE.y) {
+                    y = worldHeight - (DEAD_ZONE.y + DEAD_ZONE.height);
+                }
+                return 0;
+            } else {
+                if (camPos.y - displacement.y > camPosYMin) {
+                    addToY(-displacement.y);
+                    return -displacement.y;
+                } else {
+                    addToY(-(camPos.y - camPosYMin));
+                    return (-(camPos.y - camPosYMin));
+                }
+            }
+        } else {
+            addToY(-displacement.y);
+            if (y < 0) {
+                y = 0;
+            }
+            return 0;
+        }
     }
 
     public void render(SpriteBatch batch) {
