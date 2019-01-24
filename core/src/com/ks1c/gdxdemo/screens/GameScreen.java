@@ -12,6 +12,7 @@ public class GameScreen extends GenericScreen {
 
     private final World world;
     private final Player player;
+    private final Vector2 oldCamPos;
 
 
     public GameScreen(GdxDemo game) {
@@ -19,6 +20,7 @@ public class GameScreen extends GenericScreen {
 
         player = new Player();
         world = new World(player);
+        oldCamPos = new Vector2();
     }
 
     @Override
