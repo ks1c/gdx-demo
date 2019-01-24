@@ -27,7 +27,7 @@ public class Player extends Rectangle {
     public Player() {
         super(0, 0, WIDTH, HEIGHT);
         sprite = new Sprite(new Texture("player.png"));
-        displacement = new Vector2(1000f, 5f);
+        displacement = new Vector2(10f, 5f);
     }
 
     public void init() {
@@ -64,9 +64,31 @@ public class Player extends Rectangle {
 
     public float moveLeft(Vector3 camPos, float worldWidth) {
 
-        addToX(-displacement.x);
+        float camPosXMin = GdxDemo.GAME_WIDTH / 2f;
 
-        return -displacement.x;
+        if (camPos.x > camPosXMin) {
+            if (getXOnScreen(camPos) > DEAD_ZONE.x) {
+                addToX(-displacement.x);
+                if (getXOnScreen(camPos) < DEAD_ZONE.x) {
+                    x = worldWidth - (DEAD_ZONE.x + DEAD_ZONE.width);
+                }
+                return 0;
+            } else {
+                if (camPos.x - displacement.x > camPosXMin) {
+                    addToX(-displacement.x);
+                    return -displacement.x;
+                } else {
+                    addToX(-(camPos.x - camPosXMin));
+                    return (-(camPos.x - camPosXMin));
+                }
+            }
+        } else {
+            addToX(-displacement.x);
+            if (x < 0) {
+                x = 0;
+            }
+            return 0;
+        }
     }
 
     public float moveUp(Vector3 camPos, float worldHeight) {
