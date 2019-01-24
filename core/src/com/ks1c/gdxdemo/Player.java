@@ -15,7 +15,7 @@ public class Player extends Rectangle {
     private Vector2 displacement;
 
 
-    static final public Rectangle DEAD_ZONE = new Rectangle(
+    public static final Rectangle DEAD_ZONE = new Rectangle(
             GdxDemo.GAME_WIDTH / 2f - WIDTH / 2,
             GdxDemo.GAME_HEIGHT / 2f - HEIGHT / 2,
             WIDTH,
@@ -127,7 +127,7 @@ public class Player extends Rectangle {
         } else return GdxDemo.GAME_WIDTH / 2f;
     }
 
-    public float getYOnScreen(Vector3 camPos) {
+    private float getYOnScreen(Vector3 camPos) {
 
         if (y < camPos.y) {
             return (GdxDemo.GAME_HEIGHT / 2f - (camPos.y - y));
