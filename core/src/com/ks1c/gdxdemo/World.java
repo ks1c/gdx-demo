@@ -88,13 +88,6 @@ public class World {
                 player.height
         );
 
-        Vector2 camPosSteps = new Vector2(
-                Math.abs(camPos.x - oldCamPos.x),
-                Math.abs(camPos.y - oldCamPos.y)
-        );
-
-        Vector2 tmpCamPos = new Vector2(oldCamPos.x, oldCamPos.y);
-
         while (true) {
 
             if (playerSteps.y > 0) {
@@ -107,6 +100,9 @@ public class World {
                         if (e.getProperties().get("type").toString().equals("collision") &&
                                 tmpPlayer.overlaps(e.getRectangle())) {
                             tmpPlayer.y += 1;
+                            if (camPos.y < oldCamPos.y) {
+                                camPos.y += 1;
+                            }
                         }
                     }
                 }
@@ -119,6 +115,9 @@ public class World {
                         if (e.getProperties().get("type").toString().equals("collision") &&
                                 tmpPlayer.overlaps(e.getRectangle())) {
                             tmpPlayer.y -= 1;
+                            if (camPos.y > oldCamPos.y) {
+                                camPos.y -= 1;
+                            }
                         }
                     }
                 }
@@ -136,6 +135,9 @@ public class World {
                         if (e.getProperties().get("type").toString().equals("collision") &&
                                 tmpPlayer.overlaps(e.getRectangle())) {
                             tmpPlayer.x -= 1;
+                            if (camPos.x > oldCamPos.x) {
+                                camPos.x -= 1;
+                            }
                         }
                     }
                 }
@@ -148,33 +150,26 @@ public class World {
                         if (e.getProperties().get("type").toString().equals("collision") &&
                                 tmpPlayer.overlaps(e.getRectangle())) {
                             tmpPlayer.x += 1;
+                            if (camPos.x < oldCamPos.x) {
+                                camPos.x += 1;
+                            }
                         }
                     }
                 }
                 playerSteps.x -= 1;
             }
 
-            if (camPosSteps.y > 0) {
-                //todo
-            }
-
-            if (camPosSteps.x > 0) {
-                //todo
-            }
-
             if (playerSteps.x == 0 && playerSteps.y == 0) {
                 player.x = tmpPlayer.x;
                 player.y = tmpPlayer.y;
-                //camPos.x = tmpCamPos.x;
-                //camPos.y = tmpCamPos.y;
                 break;
             }
         }
 
         player.oldPos.x = player.x;
         player.oldPos.y = player.y;
-        //oldCamPos.x = camPos.x;
-        //oldCamPos.y = camPos.y;
+        oldCamPos.x = camPos.x;
+        oldCamPos.y = camPos.y;
     }
 
     public void render(OrthographicCamera cam) {
