@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -43,7 +44,12 @@ public class World {
         return (RectangleMapObject) entities.get(name);
     }
 
-    public RectangleMapObject getEntity(int id) {
+    public RectangleMapObject getEntity(int index) {
+
+        return (RectangleMapObject) entities.get(index);
+    }
+
+    public RectangleMapObject getEntityById(int id) {
 
         MapObject e = new MapObject();
 
@@ -68,19 +74,107 @@ public class World {
         return tiledMap.getProperties().get("origin").toString();
     }
 
-    public void update() {
+    public void update(Vector3 camPos, Vector2 oldCamPos) {
 
-        Vector2 playerStep = new Vector2(
-                Math.abs(0),
-                Math.abs(0)
+        Vector2 playerSteps = new Vector2(
+                Math.abs(player.x - player.oldPos.x),
+                Math.abs(player.y - player.oldPos.y)
         );
-        Vector2 camPosStep = new Vector2();
-        Vector2 tmpPlayer = new Vector2();
-        Vector2 tmpCamPos = new Vector2();
+
+        Rectangle tmpPlayer = new Rectangle(
+                player.oldPos.x,
+                player.oldPos.y,
+                player.width,
+                player.height
+        );
+
+        Vector2 camPosSteps = new Vector2(
+                Math.abs(camPos.x - oldCamPos.x),
+                Math.abs(camPos.y - oldCamPos.y)
+        );
+
+        Vector2 tmpCamPos = new Vector2(oldCamPos.x, oldCamPos.y);
 
         while (true) {
-            break;
+
+            if (playerSteps.y > 0) {
+
+                //BAIXO
+                if (tmpPlayer.y > player.y) {
+                    tmpPlayer.y -= 1;
+                    for (MapObject entity : entities) {
+                        RectangleMapObject e = (RectangleMapObject) entity;
+                        if (e.getProperties().get("type").toString().equals("collision") &&
+                                tmpPlayer.overlaps(e.getRectangle())) {
+                            tmpPlayer.y += 1;
+                        }
+                    }
+                }
+
+                //CIMA
+                if (tmpPlayer.y < player.y) {
+                    tmpPlayer.y += 1;
+                    for (MapObject entity : entities) {
+                        RectangleMapObject e = (RectangleMapObject) entity;
+                        if (e.getProperties().get("type").toString().equals("collision") &&
+                                tmpPlayer.overlaps(e.getRectangle())) {
+                            tmpPlayer.y -= 1;
+                        }
+                    }
+                }
+                playerSteps.y -= 1;
+            }
+
+
+            if (playerSteps.x > 0) {
+
+                //DIREITA
+                if (tmpPlayer.x < player.x) {
+                    tmpPlayer.x += 1;
+                    for (MapObject entity : entities) {
+                        RectangleMapObject e = (RectangleMapObject) entity;
+                        if (e.getProperties().get("type").toString().equals("collision") &&
+                                tmpPlayer.overlaps(e.getRectangle())) {
+                            tmpPlayer.x -= 1;
+                        }
+                    }
+                }
+
+                //ESQUERDA
+                if (tmpPlayer.x > player.x) {
+                    tmpPlayer.x -= 1;
+                    for (MapObject entity : entities) {
+                        RectangleMapObject e = (RectangleMapObject) entity;
+                        if (e.getProperties().get("type").toString().equals("collision") &&
+                                tmpPlayer.overlaps(e.getRectangle())) {
+                            tmpPlayer.x += 1;
+                        }
+                    }
+                }
+                playerSteps.x -= 1;
+            }
+
+            if (camPosSteps.y > 0) {
+                //todo
+            }
+
+            if (camPosSteps.x > 0) {
+                //todo
+            }
+
+            if (playerSteps.x == 0 && playerSteps.y == 0) {
+                player.x = tmpPlayer.x;
+                player.y = tmpPlayer.y;
+                //camPos.x = tmpCamPos.x;
+                //camPos.y = tmpCamPos.y;
+                break;
+            }
         }
+
+        player.oldPos.x = player.x;
+        player.oldPos.y = player.y;
+        //oldCamPos.x = camPos.x;
+        //oldCamPos.y = camPos.y;
     }
 
     public void render(OrthographicCamera cam) {

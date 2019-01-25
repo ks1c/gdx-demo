@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+import com.ks1c.gdxdemo.DMsg;
 import com.ks1c.gdxdemo.Player;
 import com.ks1c.gdxdemo.GdxDemo;
 import com.ks1c.gdxdemo.World;
@@ -39,27 +40,27 @@ public class GameScreen extends GenericScreen {
             game.saveGame.saveFile();
         }
         setCameraAndPlayerPosition();
+        player.oldPos.x = player.x;
+        player.oldPos.y = player.y;
     }
 
     @Override
     public void update() {
+
+        //VERTICAL
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            oldCamPos.y = cam.position.y;
             cam.translate(0, player.moveUp(cam.position, world.getHeight()));
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            oldCamPos.y = cam.position.y;
+        } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             cam.translate(0, player.moveDown(cam.position, world.getHeight()));
         }
+
+        //HORIZONTAL
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            oldCamPos.x = cam.position.x;
             cam.translate(player.moveLeft(cam.position, world.getWidth()), 0);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            oldCamPos.x = cam.position.x;
+        } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             cam.translate(player.moveRight(cam.position, world.getWidth()), 0);
         }
-        world.update();
+        world.update(cam.position, oldCamPos);
         cam.update();
     }
 
