@@ -29,7 +29,7 @@ public class Player extends Rectangle {
     public Player() {
         super(0, 0, WIDTH, HEIGHT);
         sprite = new Sprite(new Texture("player.png"));
-        displacement = new Vector2(5f, 5f);
+        displacement = new Vector2(30f, 30f);
         oldPos = new Vector2();
     }
 
