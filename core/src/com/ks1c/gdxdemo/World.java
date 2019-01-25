@@ -17,11 +17,13 @@ public class World {
     private final OrthogonalTiledMapRenderer mapRenderer;
     private MapObjects entities;
     private float width, height;
+    private final Player player;
 
     public World(Player player) {
 
         tiledMap = null;
         mapRenderer = new OrthogonalTiledMapRenderer(null);
+        this.player = player;
     }
 
     public void loadTiledMap(String mapName) {
@@ -40,6 +42,18 @@ public class World {
         return (RectangleMapObject) entities.get(name);
     }
 
+    public RectangleMapObject getEntity(int id) {
+
+        MapObject e = new MapObject();
+
+        for (MapObject entity : entities) {
+            if (entity.getProperties().get("id").equals(id)) {
+                e = entity;
+            }
+        }
+        return (RectangleMapObject) e;
+    }
+
     public float getWidth() {
         return width;
     }
@@ -51,6 +65,15 @@ public class World {
     public String getOrigin() {
 
         return tiledMap.getProperties().get("origin").toString();
+    }
+
+    public void update() {
+
+//        for (MapObject entity : entities) {
+//            if (entity.getProperties().get("id").equals(111)) {
+//                DMsg.show("ok");
+//            }
+//        }
     }
 
     public void render(OrthographicCamera cam) {
