@@ -14,6 +14,8 @@ public class Player extends Rectangle {
 
     private Vector2 displacement;
 
+    private Vector2 oldPos;
+
 
     public static final Rectangle DEAD_ZONE = new Rectangle(
             GdxDemo.GAME_WIDTH / 2f - WIDTH / 2,
@@ -28,12 +30,15 @@ public class Player extends Rectangle {
         super(0, 0, WIDTH, HEIGHT);
         sprite = new Sprite(new Texture("player.png"));
         displacement = new Vector2(5f, 5f);
+        oldPos = new Vector2();
     }
 
     public void init() {
     }
 
     public float moveRight(Vector3 camPos, float worldWidth) {
+
+        oldPos.x = x;
 
         float camPosXMax = worldWidth - GdxDemo.GAME_WIDTH / 2f;
 
@@ -64,6 +69,8 @@ public class Player extends Rectangle {
 
     public float moveLeft(Vector3 camPos, float worldWidth) {
 
+        oldPos.x = x;
+
         float camPosXMin = GdxDemo.GAME_WIDTH / 2f;
 
         if (camPos.x > camPosXMin) {
@@ -93,6 +100,8 @@ public class Player extends Rectangle {
 
     public float moveUp(Vector3 camPos, float worldHeight) {
 
+        oldPos.y = y;
+
         float camPosYMax = worldHeight - GdxDemo.GAME_HEIGHT / 2f;
 
         if (camPos.y < camPosYMax) {
@@ -121,6 +130,8 @@ public class Player extends Rectangle {
     }
 
     public float moveDown(Vector3 camPos, float worldHeight) {
+
+        oldPos.y = y;
 
         float camPosYMin = GdxDemo.GAME_HEIGHT / 2f;
 

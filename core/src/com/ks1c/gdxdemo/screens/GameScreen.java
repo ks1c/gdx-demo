@@ -44,17 +44,22 @@ public class GameScreen extends GenericScreen {
     @Override
     public void update() {
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            oldCamPos.y = cam.position.y;
             cam.translate(0, player.moveUp(cam.position, world.getHeight()));
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            oldCamPos.y = cam.position.y;
             cam.translate(0, player.moveDown(cam.position, world.getHeight()));
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            oldCamPos.x = cam.position.x;
             cam.translate(player.moveLeft(cam.position, world.getWidth()), 0);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+            oldCamPos.x = cam.position.x;
             cam.translate(player.moveRight(cam.position, world.getWidth()), 0);
         }
+        world.update();
         cam.update();
     }
 

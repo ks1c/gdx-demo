@@ -8,8 +8,9 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
-
+import com.badlogic.gdx.math.Vector3;
 
 public class World {
 
@@ -69,11 +70,17 @@ public class World {
 
     public void update() {
 
-//        for (MapObject entity : entities) {
-//            if (entity.getProperties().get("id").equals(111)) {
-//                DMsg.show("ok");
-//            }
-//        }
+        Vector2 playerStep = new Vector2(
+                Math.abs(0),
+                Math.abs(0)
+        );
+        Vector2 camPosStep = new Vector2();
+        Vector2 tmpPlayer = new Vector2();
+        Vector2 tmpCamPos = new Vector2();
+
+        while (true) {
+            break;
+        }
     }
 
     public void render(OrthographicCamera cam) {
