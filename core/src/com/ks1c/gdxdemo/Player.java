@@ -38,8 +38,6 @@ public class Player extends Rectangle {
 
     public float moveRight(Vector3 camPos, float worldWidth) {
 
-        //oldPos.x = x;
-
         float camPosXMax = worldWidth - GdxDemo.GAME_WIDTH / 2f;
 
         if (camPos.x < camPosXMax) {
@@ -68,8 +66,6 @@ public class Player extends Rectangle {
     }
 
     public float moveLeft(Vector3 camPos, float worldWidth) {
-
-        //oldPos.x = x;
 
         float camPosXMin = GdxDemo.GAME_WIDTH / 2f;
 
@@ -100,8 +96,6 @@ public class Player extends Rectangle {
 
     public float moveUp(Vector3 camPos, float worldHeight) {
 
-        //oldPos.y = y;
-
         float camPosYMax = worldHeight - GdxDemo.GAME_HEIGHT / 2f;
 
         if (camPos.y < camPosYMax) {
@@ -131,8 +125,6 @@ public class Player extends Rectangle {
 
     public float moveDown(Vector3 camPos, float worldHeight) {
 
-        //oldPos.y = y;
-
         float camPosYMin = GdxDemo.GAME_HEIGHT / 2f;
 
         if (camPos.y > camPosYMin) {
@@ -161,8 +153,8 @@ public class Player extends Rectangle {
     }
 
     public void render(SpriteBatch batch) {
-        //sprite.setAlpha(0);
-        //batch.draw(sprite, x, y);
+        sprite.setAlpha(0);
+        batch.draw(sprite, x, y);
     }
 
     private void addToX(float x) {
