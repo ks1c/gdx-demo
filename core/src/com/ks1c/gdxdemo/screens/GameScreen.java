@@ -40,8 +40,6 @@ public class GameScreen extends GenericScreen {
             game.saveGame.saveFile();
         }
         setCameraAndPlayerPosition();
-        player.oldPos.x = player.x;
-        player.oldPos.y = player.y;
     }
 
     @Override
@@ -105,6 +103,8 @@ public class GameScreen extends GenericScreen {
 
         cam.translate(camPos);
         player.setCenter(origin);
+        player.oldPos.x = player.x;
+        player.oldPos.y = player.y;
     }
 
     @Override
