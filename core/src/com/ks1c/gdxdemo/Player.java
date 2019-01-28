@@ -36,6 +36,10 @@ public class Player extends Rectangle {
     public void init() {
     }
 
+    public void fall(float G) {
+
+    }
+
     public float moveRight(Vector3 camPos, float worldWidth) {
 
         float camPosXMax = worldWidth - GdxDemo.GAME_WIDTH / 2f;
