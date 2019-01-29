@@ -17,7 +17,6 @@ public class GameScreen extends GenericScreen {
 
     public GameScreen(GdxDemo game) {
         super(game);
-
         player = new Player();
         world = new World(player);
         oldCamPos = new Vector2();
@@ -25,15 +24,11 @@ public class GameScreen extends GenericScreen {
 
     @Override
     public void show() {
-
         enableDebugMode();
-
         if (game.saveGame.exists()) {
-
             game.saveGame.loadFile();
             world.loadTiledMap(game.saveGame.getMapName());
         } else {
-
             world.loadTiledMap(game.saveGame.getMapName());
             game.saveGame.setWaypoint(world.getOrigin());
             game.saveGame.saveFile();
@@ -62,13 +57,18 @@ public class GameScreen extends GenericScreen {
     }
 
     @Override
-    public void renderSprites() {
-        player.render(batch);
+    public void renderBackGroundTiles() {
+        world.render(cam);
     }
 
     @Override
-    public void renderBackGroundTiles() {
-        world.render(cam);
+    public void renderSprites() {
+        player.render(spriteBatch);
+    }
+
+    @Override
+    public void renderForeGroundTiles() {
+        //world.render(cam);
     }
 
     private void setCameraAndPlayerPosition() {

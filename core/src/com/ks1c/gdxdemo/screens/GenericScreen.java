@@ -12,17 +12,17 @@ import com.ks1c.gdxdemo.GdxDemo;
 
 public class GenericScreen extends ScreenAdapter {
 
-    final SpriteBatch batch;
-    final ShapeRenderer shapeRenderer;
-    final OrthographicCamera cam;
+    protected final SpriteBatch spriteBatch;
+    protected final ShapeRenderer shapeRenderer;
+    protected final OrthographicCamera cam;
     private final BitmapFont font;
     private boolean debugMode = false;
-    final GdxDemo game;
+    protected final GdxDemo game;
 
     public GenericScreen(GdxDemo game) {
 
         this.game = game;
-        batch = new SpriteBatch();
+        spriteBatch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         cam = new OrthographicCamera();
         cam.setToOrtho(false, GdxDemo.GAME_WIDTH, GdxDemo.GAME_HEIGHT);
@@ -53,22 +53,22 @@ public class GenericScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        batch.setProjectionMatrix(cam.combined);
+        spriteBatch.setProjectionMatrix(cam.combined);
         shapeRenderer.setProjectionMatrix(cam.combined);
         cam.update();
 
         renderBackGroundTiles();
-        batch.begin();
+        spriteBatch.begin();
         renderSprites();
         if (isDebugModeEnabled()) {
             font.draw(
-                    batch,
+                    spriteBatch,
                     Gdx.graphics.getFramesPerSecond() + "\n" + DMsg.show(),
                     updateX(0),
                     updateY(GdxDemo.GAME_HEIGHT)
             );
         }
-        batch.end();
+        spriteBatch.end();
         renderForeGroundTiles();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         renderShapes();
