@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
-import com.ks1c.gdxdemo.DMsg;
 import com.ks1c.gdxdemo.Player;
 import com.ks1c.gdxdemo.GdxDemo;
 import com.ks1c.gdxdemo.World;
@@ -47,16 +46,16 @@ public class GameScreen extends GenericScreen {
 
         //VERTICAL
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            cam.translate(0, player.moveUp(cam.position, world.getHeight()));
+            player.moveUp(cam.position, world.getHeight());
         } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            cam.translate(0, player.moveDown(cam.position, world.getHeight()));
+            player.moveDown(cam.position, world.getHeight());
         }
 
         //HORIZONTAL
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            cam.translate(player.moveLeft(cam.position, world.getWidth()), 0);
+            player.moveLeft(cam.position, world.getWidth());
         } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            cam.translate(player.moveRight(cam.position, world.getWidth()), 0);
+            player.moveRight(cam.position, world.getWidth());
         }
         world.update(cam.position, oldCamPos);
         cam.update();
