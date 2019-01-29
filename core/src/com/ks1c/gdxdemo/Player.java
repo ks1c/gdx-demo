@@ -16,7 +16,7 @@ public class Player extends Rectangle {
 
     public Vector2 oldPos;
 
-    private float jumpStep = 0;
+    public float jumpStep = 0;
     private boolean jumped = false;
     private boolean inTheAir = true;
     private static final float MAX_JUMP_STEP = 13 + World.G;

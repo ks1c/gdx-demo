@@ -67,7 +67,7 @@ public class GameScreen extends GenericScreen {
     }
 
     @Override
-    public void renderBackGroungTiles() {
+    public void renderBackGroundTiles() {
         world.render(cam);
     }
 

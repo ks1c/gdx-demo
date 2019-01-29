@@ -12,24 +12,21 @@ import com.ks1c.gdxdemo.GdxDemo;
 
 public class GenericScreen extends ScreenAdapter {
 
-    protected final SpriteBatch batch;
-    protected final ShapeRenderer shapeRenderer;
-    protected final OrthographicCamera cam;
+    final SpriteBatch batch;
+    final ShapeRenderer shapeRenderer;
+    final OrthographicCamera cam;
     private final BitmapFont font;
     private boolean debugMode = false;
-    public GdxDemo game;
+    final GdxDemo game;
 
     public GenericScreen(GdxDemo game) {
 
         this.game = game;
-
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
-
         cam = new OrthographicCamera();
         cam.setToOrtho(false, GdxDemo.GAME_WIDTH, GdxDemo.GAME_HEIGHT);
         cam.update();
-
         font = new BitmapFont();
     }
 
@@ -42,10 +39,10 @@ public class GenericScreen extends ScreenAdapter {
     public void renderShapes() {
     }
 
-    public void renderBackGroungTiles() {
+    public void renderBackGroundTiles() {
     }
 
-    public void renderForeGroungTiles() {
+    public void renderForeGroundTiles() {
     }
 
     @Override
@@ -56,17 +53,13 @@ public class GenericScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         batch.setProjectionMatrix(cam.combined);
         shapeRenderer.setProjectionMatrix(cam.combined);
         cam.update();
 
-        renderBackGroungTiles();
-
+        renderBackGroundTiles();
         batch.begin();
-
         renderSprites();
-
         if (isDebugModeEnabled()) {
             font.draw(
                     batch,
@@ -75,35 +68,32 @@ public class GenericScreen extends ScreenAdapter {
                     updateY(GdxDemo.GAME_HEIGHT)
             );
         }
-
         batch.end();
-
-        renderForeGroungTiles();
-
+        renderForeGroundTiles();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         renderShapes();
         shapeRenderer.end();
     }
 
-    void enableDebugMode() {
+    public void enableDebugMode() {
         debugMode = true;
     }
 
-    void disableDebugMode() {
+    public void disableDebugMode() {
         debugMode = false;
     }
 
-    boolean isDebugModeEnabled() {
+    private boolean isDebugModeEnabled() {
         return debugMode;
     }
 
     public float updateX(float x) {
 
-        return cam.position.x - GdxDemo.GAME_WIDTH / 2 + x;
+        return cam.position.x - GdxDemo.GAME_WIDTH / 2f + x;
     }
 
     public float updateY(float y) {
 
-        return cam.position.y - GdxDemo.GAME_HEIGHT / 2 + y;
+        return cam.position.y - GdxDemo.GAME_HEIGHT / 2f + y;
     }
 }

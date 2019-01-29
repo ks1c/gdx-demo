@@ -9,14 +9,13 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 public class World {
 
     private TiledMap tiledMap;
-    public static final float G = 10;
+    static final float G = 10;
     private final OrthogonalTiledMapRenderer mapRenderer;
     private MapObjects entities;
     private float width, height;
