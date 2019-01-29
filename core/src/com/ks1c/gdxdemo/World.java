@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.Vector3;
 public class World {
 
     private TiledMap tiledMap;
+    public static final float G = 10;
     private final OrthogonalTiledMapRenderer mapRenderer;
     private MapObjects entities;
     private float width, height;
@@ -76,6 +77,8 @@ public class World {
 
     public void update(Vector3 camPos, Vector2 oldCamPos) {
 
+        player.fall(G, camPos, getHeight());
+
         Vector2 playerSteps = new Vector2(
                 Math.abs(player.x - player.oldPos.x),
                 Math.abs(player.y - player.oldPos.y)
@@ -103,6 +106,7 @@ public class World {
                             if (camPos.y < oldCamPos.y) {
                                 camPos.y += 1;
                             }
+                            player.setInTheAir(false);
                         }
                     }
                 }

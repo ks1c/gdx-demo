@@ -16,6 +16,11 @@ public class Player extends Rectangle {
 
     public Vector2 oldPos;
 
+    private float jumpStep = 0;
+    private boolean jumped = false;
+    private boolean inTheAir = true;
+    private static final float MAX_JUMP_STEP = 13 + World.G;
+
     public static final Rectangle DEAD_ZONE = new Rectangle(
             GdxDemo.GAME_WIDTH / 2f - WIDTH / 2,
             GdxDemo.GAME_HEIGHT / 2f - HEIGHT / 2,
@@ -35,8 +40,42 @@ public class Player extends Rectangle {
     public void init() {
     }
 
-    public void fall(float G) {
+    public void fall(float G, Vector3 camPos, float worldHeight) {
 
+        setInTheAir(true);
+
+        if (G - jumpStep > 0) {
+            displacement.y = G - jumpStep;
+            moveDown(camPos, worldHeight);
+        } else {
+            displacement.y = jumpStep - G;
+            moveUp(camPos, worldHeight);
+        }
+
+        if (jumpStep > 0) {
+            jumpStep -= 1;
+        }
+    }
+
+    public void jump() {
+
+        if (!isInTheAir() && !jumped) {
+            jumped = true;
+            setInTheAir(true);
+            jumpStep = MAX_JUMP_STEP;
+        }
+    }
+
+    public void endJump() {
+        jumped = false;
+    }
+
+    public boolean isInTheAir() {
+        return inTheAir;
+    }
+
+    public void setInTheAir(boolean inTheAir) {
+        this.inTheAir = inTheAir;
     }
 
     public void moveRight(Vector3 camPos, float worldWidth) {
