@@ -17,6 +17,7 @@ public class GameScreen extends GenericScreen {
     private final World world;
     private final Player player;
     private final Vector2 oldCamPos;
+    int i = 0;
 
 
     public GameScreen(GdxDemo game) {
@@ -131,8 +132,17 @@ public class GameScreen extends GenericScreen {
 
         float lightRadius = 200f;
         float cellSizeXY = 16f;
-        int nCircles = 30;
+        int nCircles;
 
+        if (i < 30) {
+            nCircles = 20;
+        } else {
+            nCircles = 30;
+        }
+        if (i >= 60) {
+            i = 0;
+        }
+        i++;
 
         float lightRadiusRatio = lightRadius / nCircles;
 
