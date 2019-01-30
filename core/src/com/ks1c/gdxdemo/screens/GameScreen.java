@@ -3,6 +3,7 @@ package com.ks1c.gdxdemo.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.ks1c.gdxdemo.Player;
 import com.ks1c.gdxdemo.GdxDemo;
@@ -109,6 +110,7 @@ public class GameScreen extends GenericScreen {
     @Override
     public void renderShapes() {
 
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         //DEAD_ZONE
         shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.rect(updateX(0), updateY(Player.DEAD_ZONE.y), GdxDemo.GAME_WIDTH, Player.DEAD_ZONE.height);
@@ -117,5 +119,6 @@ public class GameScreen extends GenericScreen {
         //BOUNDING BOX
         shapeRenderer.setColor(Color.BLUE);
         shapeRenderer.rect(player.x, player.y, Player.WIDTH, Player.HEIGHT);
+        shapeRenderer.end();
     }
 }

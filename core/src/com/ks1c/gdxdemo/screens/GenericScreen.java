@@ -70,9 +70,7 @@ public class GenericScreen extends ScreenAdapter {
         }
         spriteBatch.end();
         renderForeGroundTiles();
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         renderShapes();
-        shapeRenderer.end();
     }
 
     public void enableDebugMode() {
