@@ -110,7 +110,7 @@ public class GameScreen extends GenericScreen {
     @Override
     public void renderShapes() {
 
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        /*shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         //DEAD_ZONE
         shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.rect(updateX(0), updateY(Player.DEAD_ZONE.y), GdxDemo.GAME_WIDTH, Player.DEAD_ZONE.height);
@@ -119,6 +119,31 @@ public class GameScreen extends GenericScreen {
         //BOUNDING BOX
         shapeRenderer.setColor(Color.BLUE);
         shapeRenderer.rect(player.x, player.y, Player.WIDTH, Player.HEIGHT);
+        shapeRenderer.end();*/
+
+        renderShadows();
+    }
+
+    private void renderShadows() {
+
+        float cellSizeXY = 4f;
+        int maxX = (int) (GdxDemo.GAME_WIDTH / cellSizeXY);
+        int maxY = (int) (GdxDemo.GAME_HEIGHT / cellSizeXY);
+        Vector2 cells[][] = new Vector2[maxX][maxY];
+
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(new Color(0, 0, 0, 0.5f));
+
+        for (int i = 0; i < maxX; i++)
+            for (int j = 0; j < maxY; j++) {
+
+                shapeRenderer.rect(
+                        updateX(0) + i * cellSizeXY,
+                        updateY(0) + j * cellSizeXY,
+                        cellSizeXY,
+                        cellSizeXY
+                );
+            }
         shapeRenderer.end();
     }
 }
