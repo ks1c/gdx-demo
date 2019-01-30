@@ -4,7 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.ks1c.gdxdemo.DMsg;
 import com.ks1c.gdxdemo.Player;
 import com.ks1c.gdxdemo.GdxDemo;
 import com.ks1c.gdxdemo.World;
@@ -126,16 +129,43 @@ public class GameScreen extends GenericScreen {
 
     private void renderShadows() {
 
-        float cellSizeXY = 4f;
-        int maxX = (int) (GdxDemo.GAME_WIDTH / cellSizeXY);
-        int maxY = (int) (GdxDemo.GAME_HEIGHT / cellSizeXY);
-        Vector2 cells[][] = new Vector2[maxX][maxY];
+        float lightRadius = 200f;
+        float cellSizeXY = 16f;
+        int nCircles = 30;
+
+
+        float lightRadiusRatio = lightRadius / nCircles;
+
+        Circle tmp[] = new Circle[nCircles];
+
+        for (int k = 0; k < nCircles; k++) {
+            tmp[k] = new Circle(player.x + 16f, player.y + 16f, k * lightRadiusRatio);
+        }
+
+
+        int maxX = (int) Math.ceil(GdxDemo.GAME_WIDTH / cellSizeXY);
+        int maxY = (int) Math.ceil(GdxDemo.GAME_HEIGHT / cellSizeXY);
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(new Color(0, 0, 0, 0.5f));
+
 
         for (int i = 0; i < maxX; i++)
             for (int j = 0; j < maxY; j++) {
+
+                shapeRenderer.setColor(new Color(0, 0, 0, 1f));
+
+                Circle c = new Circle(
+                        updateX(0) + i * cellSizeXY + cellSizeXY / 2f,
+                        updateY(0) + j * cellSizeXY + cellSizeXY / 2f,
+                        cellSizeXY / 2f
+                );
+
+                for (int k = nCircles - 1; k > 0; k--) {
+
+                    if (tmp[k].overlaps(c)) {
+                        shapeRenderer.setColor(new Color(0, 0, 0, k / (float) nCircles));
+                    }
+                }
 
                 shapeRenderer.rect(
                         updateX(0) + i * cellSizeXY,

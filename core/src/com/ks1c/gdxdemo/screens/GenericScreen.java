@@ -2,6 +2,7 @@ package com.ks1c.gdxdemo.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -28,6 +29,7 @@ public class GenericScreen extends ScreenAdapter {
         cam.setToOrtho(false, GdxDemo.GAME_WIDTH, GdxDemo.GAME_HEIGHT);
         cam.update();
         font = new BitmapFont();
+        font.setColor(Color.CYAN);
     }
 
     public void update() {
@@ -56,20 +58,22 @@ public class GenericScreen extends ScreenAdapter {
         renderBackGroundTiles();
         spriteBatch.begin();
         renderSprites();
-        if (isDebugModeEnabled()) {
-            font.draw(
-                    spriteBatch,
-                    Gdx.graphics.getFramesPerSecond() + "\n" + DMsg.show(),
-                    updateX(0),
-                    updateY(GdxDemo.GAME_HEIGHT)
-            );
-        }
         spriteBatch.end();
         renderForeGroundTiles();
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         renderShapes();
         Gdx.gl.glDisable(GL20.GL_BLEND);
+        if (isDebugModeEnabled()) {
+            spriteBatch.begin();
+            font.draw(
+                    spriteBatch,
+                    Gdx.graphics.getFramesPerSecond() + "\n" + DMsg.show(),
+                    updateX(0),
+                    updateY(GdxDemo.GAME_HEIGHT)
+            );
+            spriteBatch.end();
+        }
     }
 
     public void enableDebugMode() {
