@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Bresenham2;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.ks1c.gdxdemo.DMsg;
@@ -114,23 +116,31 @@ public class GameScreen extends GenericScreen {
     @Override
     public void renderShapes() {
 
+        renderShadows();
+
         /*shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         //DEAD_ZONE
         shapeRenderer.setColor(Color.BLACK);
         shapeRenderer.rect(updateX(0), updateY(Player.DEAD_ZONE.y), GdxDemo.GAME_WIDTH, Player.DEAD_ZONE.height);
-        shapeRenderer.rect(updateX(Player.DEAD_ZONE.x), updateY(0), Player.DEAD_ZONE.width, GdxDemo.GAME_HEIGHT);
+        shapeRenderer.rect(updateX(Player.DEAD_ZONE.x), updateY(0), Player.DEAD_ZONE.width, GdxDemo.GAME_HEIGHT);*/
 
         //BOUNDING BOX
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.BLUE);
-        shapeRenderer.rect(player.x, player.y, Player.WIDTH, Player.HEIGHT);
-        shapeRenderer.end();*/
-
-        renderShadows();
+        shapeRenderer.circle(player.x + 16f, player.y + 16f, 200f);
+        for (int ang = 0; ang < 360; ang += 5) {
+            shapeRenderer.line(
+                    player.x + 16f, player.y + 16f,
+                    player.x + 16f + (float) (200f * Math.cos(Math.toRadians(ang))),
+                    player.y + 16f + (float) (200f * Math.sin(Math.toRadians(ang)))
+            );
+        }
+        shapeRenderer.end();
     }
 
     private void renderShadows() {
 
-        float lightRadius = 200f;
+        float lightRadius = 140f;
         float cellSizeXY = 16f;
         int nCircles;
 
@@ -149,7 +159,7 @@ public class GameScreen extends GenericScreen {
         Circle tmp[] = new Circle[nCircles];
 
         for (int k = 0; k < nCircles; k++) {
-            tmp[k] = new Circle(player.x + 16f, player.y + 16f, k * lightRadiusRatio);
+            tmp[k] = new Circle(player.x + 16f, player.y + 16f, 60 + k * lightRadiusRatio);
         }
 
 
@@ -170,8 +180,7 @@ public class GameScreen extends GenericScreen {
                         cellSizeXY / 2f
                 );
 
-                for (int k = nCircles - 1; k > 0; k--) {
-
+                for (int k = nCircles - 1; k >= 0; k--) {
                     if (tmp[k].overlaps(c)) {
                         shapeRenderer.setColor(new Color(0, 0, 0, k / (float) nCircles));
                     }
