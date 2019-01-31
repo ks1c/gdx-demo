@@ -20,12 +20,14 @@ public class World {
     private MapObjects entities;
     private float width, height;
     private final Player player;
+    public LightRenderer lightRenderer;
 
     public World(Player player) {
 
         tiledMap = null;
         mapRenderer = new OrthogonalTiledMapRenderer(null);
         this.player = player;
+        lightRenderer = new LightRenderer();
     }
 
     public void loadTiledMap(String mapName) {

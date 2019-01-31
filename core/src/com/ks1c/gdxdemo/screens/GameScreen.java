@@ -125,17 +125,18 @@ public class GameScreen extends GenericScreen {
         shapeRenderer.rect(updateX(Player.DEAD_ZONE.x), updateY(0), Player.DEAD_ZONE.width, GdxDemo.GAME_HEIGHT);*/
 
         //BOUNDING BOX
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(Color.BLUE);
-        shapeRenderer.circle(player.x + 16f, player.y + 16f, 200f);
-        for (int ang = 0; ang < 360; ang += 5) {
-            shapeRenderer.line(
-                    player.x + 16f, player.y + 16f,
-                    player.x + 16f + (float) (200f * Math.cos(Math.toRadians(ang))),
-                    player.y + 16f + (float) (200f * Math.sin(Math.toRadians(ang)))
-            );
-        }
-        shapeRenderer.end();
+//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//        shapeRenderer.setColor(Color.BLUE);
+//        shapeRenderer.circle(player.x + 16f, player.y + 16f, 200f);
+//        for (int ang = 0; ang < 360; ang += 5) {
+//            shapeRenderer.line(
+//                    player.x + 16f, player.y + 16f,
+//                    player.x + 16f + (float) (200f * Math.cos(Math.toRadians(ang))),
+//                    player.y + 16f + (float) (200f * Math.sin(Math.toRadians(ang)))
+//            );
+//        }
+//        shapeRenderer.end();
+//        world.lightRenderer.render(shapeRenderer);
     }
 
     private void renderShadows() {
@@ -167,7 +168,6 @@ public class GameScreen extends GenericScreen {
         int maxY = (int) Math.ceil(GdxDemo.GAME_HEIGHT / cellSizeXY);
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-
 
         for (int i = 0; i < maxX; i++)
             for (int j = 0; j < maxY; j++) {
