@@ -116,7 +116,9 @@ public class GameScreen extends GenericScreen {
     @Override
     public void renderShapes() {
 
-        renderShadows();
+
+        world.renderLights(shapeRenderer, cam.position);
+
 
         /*shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
         //DEAD_ZONE
@@ -137,62 +139,5 @@ public class GameScreen extends GenericScreen {
 //        }
 //        shapeRenderer.end();
 //        world.lightRenderer.render(shapeRenderer);
-    }
-
-    private void renderShadows() {
-
-        float lightRadius = 140f;
-        float cellSizeXY = 16f;
-        int nCircles;
-
-        if (i < 30) {
-            nCircles = 20;
-        } else {
-            nCircles = 30;
-        }
-        if (i >= 60) {
-            i = 0;
-        }
-        i++;
-
-        float lightRadiusRatio = lightRadius / nCircles;
-
-        Circle tmp[] = new Circle[nCircles];
-
-        for (int k = 0; k < nCircles; k++) {
-            tmp[k] = new Circle(player.x + 16f, player.y + 16f, 60 + k * lightRadiusRatio);
-        }
-
-
-        int maxX = (int) Math.ceil(GdxDemo.GAME_WIDTH / cellSizeXY);
-        int maxY = (int) Math.ceil(GdxDemo.GAME_HEIGHT / cellSizeXY);
-
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-
-        for (int i = 0; i < maxX; i++)
-            for (int j = 0; j < maxY; j++) {
-
-                shapeRenderer.setColor(new Color(0, 0, 0, 1f));
-
-                Circle c = new Circle(
-                        updateX(0) + i * cellSizeXY + cellSizeXY / 2f,
-                        updateY(0) + j * cellSizeXY + cellSizeXY / 2f,
-                        cellSizeXY / 2f
-                );
-
-                for (int k = nCircles - 1; k >= 0; k--) {
-                    if (tmp[k].overlaps(c)) {
-                        shapeRenderer.setColor(new Color(0, 0, 0, k / (float) nCircles));
-                    }
-                }
-
-                shapeRenderer.rect(
-                        updateX(0) + i * cellSizeXY,
-                        updateY(0) + j * cellSizeXY,
-                        cellSizeXY,
-                        cellSizeXY
-                );
-            }
-        shapeRenderer.end();
     }
 }

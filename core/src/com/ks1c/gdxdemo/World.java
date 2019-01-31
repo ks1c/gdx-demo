@@ -1,6 +1,8 @@
 package com.ks1c.gdxdemo;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -20,7 +22,7 @@ public class World {
     private MapObjects entities;
     private float width, height;
     private final Player player;
-    public LightRenderer lightRenderer;
+    private LightRenderer lightRenderer;
 
     public World(Player player) {
 
@@ -181,5 +183,10 @@ public class World {
 
         mapRenderer.setView(cam);
         mapRenderer.render();
+    }
+
+    public void renderLights(ShapeRenderer shapeRenderer, Vector3 camPos) {
+        lightRenderer.addLights(new Light(player.getCenter(new Vector2()), 200f));
+        lightRenderer.render(shapeRenderer, camPos);
     }
 }
