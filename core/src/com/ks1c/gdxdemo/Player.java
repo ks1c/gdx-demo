@@ -46,7 +46,7 @@ public class Player extends Rectangle {
 
         lightZone.setCenter(getCenter(new Vector2()));
 
-        lightZone.setSize(GdxDemo.GAME_WIDTH, GdxDemo.GAME_HEIGHT);
+        lightZone.setSize(GdxDemo.GAME_WIDTH + Light.MAX_RADIUS, GdxDemo.GAME_HEIGHT + Light.MAX_RADIUS);
 
         return lightZone;
     }

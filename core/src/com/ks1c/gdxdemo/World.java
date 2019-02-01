@@ -2,6 +2,9 @@ package com.ks1c.gdxdemo;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -23,6 +26,7 @@ public class World {
     private float width, height;
     private final Player player;
     private LightRenderer lightRenderer;
+    private final Sprite bg;
 
     public World(Player player) {
 
@@ -30,6 +34,7 @@ public class World {
         mapRenderer = new OrthogonalTiledMapRenderer(null);
         this.player = player;
         lightRenderer = new LightRenderer();
+        bg = new Sprite(new Texture("bg.png"));
     }
 
     public void loadTiledMap(String mapName) {
@@ -182,19 +187,21 @@ public class World {
             RectangleMapObject e = (RectangleMapObject) entity;
             if (e.getProperties().get("type").toString().equals("light") &&
                     player.getLightZone().overlaps(e.getRectangle())) {
-                lightRenderer.addLights(new Light(e.getRectangle().getCenter(new Vector2()), 200f));
+                //lightRenderer.addLights(new Light(e.getRectangle().getCenter(new Vector2()), 500f));
             }
         }
     }
 
-    public void render(OrthographicCamera cam) {
-
+    public void render(OrthographicCamera cam, SpriteBatch batch) {
+        batch.begin();
+        batch.draw(bg, cam.position.x - bg.getWidth() / 2f, cam.position.y - bg.getHeight() / 2f);
+        batch.end();
         mapRenderer.setView(cam);
         mapRenderer.render();
     }
 
     public void renderLights(ShapeRenderer shapeRenderer, Vector3 camPos) {
-        //lightRenderer.addLights(new Light(player.getCenter(new Vector2()), 300f));
+        lightRenderer.addLights(new Light(player.getCenter(new Vector2()), 400f));
         lightRenderer.render(shapeRenderer, camPos);
     }
 }
