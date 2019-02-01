@@ -177,6 +177,14 @@ public class World {
         player.oldPos.y = player.y;
         oldCamPos.x = camPos.x;
         oldCamPos.y = camPos.y;
+
+        for (MapObject entity : entities) {
+            RectangleMapObject e = (RectangleMapObject) entity;
+            if (e.getProperties().get("type").toString().equals("light") &&
+                    player.getLightZone().overlaps(e.getRectangle())) {
+                lightRenderer.addLights(new Light(e.getRectangle().getCenter(new Vector2()), 200f));
+            }
+        }
     }
 
     public void render(OrthographicCamera cam) {
@@ -186,7 +194,7 @@ public class World {
     }
 
     public void renderLights(ShapeRenderer shapeRenderer, Vector3 camPos) {
-        lightRenderer.addLights(new Light(player.getCenter(new Vector2()), 200f));
+        //lightRenderer.addLights(new Light(player.getCenter(new Vector2()), 300f));
         lightRenderer.render(shapeRenderer, camPos);
     }
 }

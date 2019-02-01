@@ -13,6 +13,9 @@ public class LightRenderer {
     private static final float CELL_SIZE = 16f;
     public static final int MAX_INTERACTIONS = 20;
     private final List<Light> lights;
+    private static final int MAX_INDEX_X = (int) Math.ceil(GdxDemo.GAME_WIDTH / CELL_SIZE);
+    private static final int MAX_INDEX_Y = (int) Math.ceil(GdxDemo.GAME_HEIGHT / CELL_SIZE);
+    private float opacity[][];
 
     public LightRenderer() {
 
@@ -25,14 +28,10 @@ public class LightRenderer {
 
     public void render(ShapeRenderer shapeRenderer, Vector3 camPos) {
 
-
-        int maxIndexX = (int) Math.ceil(GdxDemo.GAME_WIDTH / CELL_SIZE);
-        int maxIndexY = (int) Math.ceil(GdxDemo.GAME_HEIGHT / CELL_SIZE);
-
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
-        for (int x = 0; x < maxIndexX; x++)
-            for (int y = 0; y < maxIndexY; y++) {
+        for (int x = 0; x < MAX_INDEX_X; x++)
+            for (int y = 0; y < MAX_INDEX_Y; y++) {
 
                 shapeRenderer.setColor(new Color(0, 0, 0, 1f));
 
@@ -56,7 +55,6 @@ public class LightRenderer {
                         CELL_SIZE,
                         CELL_SIZE
                 );
-
             }
         shapeRenderer.end();
         lights.clear();

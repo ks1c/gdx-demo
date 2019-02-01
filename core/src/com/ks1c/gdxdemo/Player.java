@@ -28,6 +28,8 @@ public class Player extends Rectangle {
             HEIGHT
     );
 
+    private final Rectangle lightZone = new Rectangle();
+
     private final Sprite sprite;
 
     public Player() {
@@ -38,6 +40,15 @@ public class Player extends Rectangle {
     }
 
     public void init() {
+    }
+
+    public Rectangle getLightZone() {
+
+        lightZone.setCenter(getCenter(new Vector2()));
+
+        lightZone.setSize(GdxDemo.GAME_WIDTH, GdxDemo.GAME_HEIGHT);
+
+        return lightZone;
     }
 
     public void fall(float G, Vector3 camPos, float worldHeight) {

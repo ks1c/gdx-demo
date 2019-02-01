@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Light {
 
-    private static final float MAX_RADIUS = 500;
+    public static final float MAX_RADIUS = 500;
     private final Vector2 position;
     private float radius;
     //private final Color color;
