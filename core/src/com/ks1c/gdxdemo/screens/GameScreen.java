@@ -116,8 +116,8 @@ public class GameScreen extends GenericScreen {
             cam.position.y = camPosMax.y;
         }
 
-        if (cam.position.x < camPosMin.x) {
-            cam.position.x = camPosMin.x;
+        if (cam.position.y < camPosMin.y) {
+            cam.position.y = camPosMin.y;
         }
 
         cam.update();
