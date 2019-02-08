@@ -6,6 +6,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 public class Player extends Rectangle {
 
@@ -28,14 +32,16 @@ public class Player extends Rectangle {
             HEIGHT
     );
 
-    private final Rectangle lightZone = new Rectangle();
-
     private final Sprite sprite;
+
+    //BOX2D AND BOX2DLIGHTS
+    private Body bodyOfLights;
+
 
     public Player() {
         super(0, 0, WIDTH, HEIGHT);
         sprite = new Sprite(new Texture("player.png"));
-        displacement = new Vector2(10f, 10f);
+        displacement = new Vector2(2f, 10f);
         oldPos = new Vector2();
     }
 
@@ -217,5 +223,35 @@ public class Player extends Rectangle {
         } else if (y > camPos.y) {
             return ((GdxDemo.GAME_HEIGHT / 2f) + (y - camPos.y));
         } else return GdxDemo.GAME_HEIGHT / 2f;
+    }
+
+    public void update() {
+        bodyOfLights.setTransform(
+                (x + width / 2f) / World.PIXELS_TO_METERS,
+                (y + height / 2f) / World.PIXELS_TO_METERS,
+                bodyOfLights.getAngle()
+        );
+    }
+
+    public void setBodyOfLights(com.badlogic.gdx.physics.box2d.World worldOfLights) {
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.position.set(
+                (x + width / 2f) / World.PIXELS_TO_METERS,
+                (y + height / 2f) / World.PIXELS_TO_METERS
+        );
+        bodyOfLights = worldOfLights.createBody(bodyDef);
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(
+                (width / 2f) / World.PIXELS_TO_METERS,
+                (height / 2f) / World.PIXELS_TO_METERS
+        );
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+        fixtureDef.density = 1f;
+        fixtureDef.isSensor = true;
+        bodyOfLights.setFixedRotation(true);
+        bodyOfLights.createFixture(fixtureDef);
+        shape.dispose();
     }
 }

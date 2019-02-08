@@ -13,9 +13,17 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 
 public class World {
 
@@ -25,6 +33,11 @@ public class World {
     private MapObjects entities;
     private float width, height;
     private final Player player;
+
+    //BOX2D AND BOX2DLIGHTS
+    public static final float PIXELS_TO_METERS = 100f;
+    private com.badlogic.gdx.physics.box2d.World worldOfLights;
+    private RayHandler rayHandler;
 
     public World(Player player) {
 
@@ -104,7 +117,7 @@ public class World {
                     tmpPlayer.y -= 1;
                     for (MapObject entity : entities) {
                         RectangleMapObject e = (RectangleMapObject) entity;
-                        if (e.getProperties().get("type").toString().equals("collision") &&
+                        if (e.getProperties().get("type").toString().equals("staticBody") &&
                                 tmpPlayer.overlaps(e.getRectangle())) {
                             tmpPlayer.y += 1;
                             if (camPos.y < oldCamPos.y) {
@@ -120,7 +133,7 @@ public class World {
                     tmpPlayer.y += 1;
                     for (MapObject entity : entities) {
                         RectangleMapObject e = (RectangleMapObject) entity;
-                        if (e.getProperties().get("type").toString().equals("collision") &&
+                        if (e.getProperties().get("type").toString().equals("staticBody") &&
                                 tmpPlayer.overlaps(e.getRectangle())) {
                             tmpPlayer.y -= 1;
                             if (camPos.y > oldCamPos.y) {
@@ -140,7 +153,7 @@ public class World {
                     tmpPlayer.x += 1;
                     for (MapObject entity : entities) {
                         RectangleMapObject e = (RectangleMapObject) entity;
-                        if (e.getProperties().get("type").toString().equals("collision") &&
+                        if (e.getProperties().get("type").toString().equals("staticBody") &&
                                 tmpPlayer.overlaps(e.getRectangle())) {
                             tmpPlayer.x -= 1;
                             if (camPos.x > oldCamPos.x) {
@@ -155,7 +168,7 @@ public class World {
                     tmpPlayer.x -= 1;
                     for (MapObject entity : entities) {
                         RectangleMapObject e = (RectangleMapObject) entity;
-                        if (e.getProperties().get("type").toString().equals("collision") &&
+                        if (e.getProperties().get("type").toString().equals("staticBody") &&
                                 tmpPlayer.overlaps(e.getRectangle())) {
                             tmpPlayer.x += 1;
                             if (camPos.x < oldCamPos.x) {
@@ -183,5 +196,77 @@ public class World {
     public void render(OrthographicCamera cam) {
         mapRenderer.setView(cam);
         mapRenderer.render();
+    }
+
+    public void initLighting() {
+        worldOfLights = new com.badlogic.gdx.physics.box2d.World(
+                new Vector2(0, 0),
+                true
+        );
+        player.setBodyOfLights(worldOfLights);
+        rayHandler = new RayHandler(worldOfLights);
+        rayHandler.setAmbientLight(0, 0, 0, 0);
+        rayHandler.setBlurNum(3);
+        rayHandler.setShadows(true);
+
+        for (MapObject entity : entities) {
+            if (entity.getProperties().get("type").toString().equals("staticBody")) {
+                generateStaticBody((RectangleMapObject) entity);
+            }
+            if (entity.getProperties().get("type").toString().equals("staticLight")) {
+                generateStaticLight((RectangleMapObject) entity);
+            }
+        }
+    }
+
+    private void generateStaticBody(RectangleMapObject rectangleMapObject) {
+        Rectangle rect = rectangleMapObject.getRectangle();
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.position.set(
+                (rect.x + rect.width / 2f) / PIXELS_TO_METERS,
+                (rect.y + rect.height / 2f) / PIXELS_TO_METERS
+        );
+        Body body = worldOfLights.createBody(bodyDef);
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(
+                (rect.width / 2f - 0.5f) / PIXELS_TO_METERS,
+                (rect.height / 2f - 0.5f) / PIXELS_TO_METERS
+        );
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+        fixtureDef.density = 1f;
+        body.createFixture(fixtureDef);
+        shape.dispose();
+    }
+
+    private void generateStaticLight(RectangleMapObject rectangleMapObject) {
+
+        PointLight pointLight = new PointLight(rayHandler,
+                100,
+                rectangleMapObject.getProperties().get("Color", Color.class),
+                500f / PIXELS_TO_METERS,
+                rectangleMapObject.getRectangle().x / PIXELS_TO_METERS,
+                rectangleMapObject.getRectangle().y / PIXELS_TO_METERS
+        );
+        pointLight.setSoft(true);
+        pointLight.setSoftnessLength(1f);
+    }
+
+    public void stepLighting() {
+        worldOfLights.step(1 / 60f, 6, 2);
+    }
+
+    public void renderLighting(OrthographicCamera cam) {
+        Matrix4 debugMatrix = cam.combined;
+        debugMatrix.scl(PIXELS_TO_METERS);
+        rayHandler.setCombinedMatrix(
+                debugMatrix,
+                cam.position.x / PIXELS_TO_METERS,
+                cam.position.y / PIXELS_TO_METERS,
+                cam.viewportWidth * cam.zoom,
+                cam.viewportHeight * cam.zoom
+        );
+        rayHandler.updateAndRender();
     }
 }

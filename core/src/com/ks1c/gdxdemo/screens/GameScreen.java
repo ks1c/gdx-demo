@@ -40,6 +40,7 @@ public class GameScreen extends GenericScreen {
             game.saveGame.saveFile();
         }
         setCameraAndPlayerPosition();
+        world.initLighting();
     }
 
     @Override
@@ -59,6 +60,8 @@ public class GameScreen extends GenericScreen {
         }
 
         world.update(cam.position, oldCamPos);
+        player.update();
+        world.stepLighting();
         cam.update();
     }
 
@@ -75,6 +78,7 @@ public class GameScreen extends GenericScreen {
     @Override
     public void renderForeGroundTiles() {
         //world.render(cam);
+        world.renderLighting(cam);
     }
 
     private void setCameraAndPlayerPosition() {
