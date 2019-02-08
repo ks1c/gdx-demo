@@ -19,7 +19,6 @@ public class GameScreen extends GenericScreen {
     private final World world;
     private final Player player;
     private final Vector2 oldCamPos;
-    int i = 0;
 
 
     public GameScreen(GdxDemo game) {
@@ -65,7 +64,7 @@ public class GameScreen extends GenericScreen {
 
     @Override
     public void renderBackGroundTiles() {
-        world.render(cam, spriteBatch);
+        world.render(cam);
     }
 
     @Override
@@ -111,33 +110,5 @@ public class GameScreen extends GenericScreen {
         player.setCenter(origin);
         player.oldPos.x = player.x;
         player.oldPos.y = player.y;
-    }
-
-    @Override
-    public void renderShapes() {
-
-
-        world.renderLights(shapeRenderer, cam.position);
-
-
-        /*shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        //DEAD_ZONE
-        shapeRenderer.setColor(Color.BLACK);
-        shapeRenderer.rect(updateX(0), updateY(Player.DEAD_ZONE.y), GdxDemo.GAME_WIDTH, Player.DEAD_ZONE.height);
-        shapeRenderer.rect(updateX(Player.DEAD_ZONE.x), updateY(0), Player.DEAD_ZONE.width, GdxDemo.GAME_HEIGHT);*/
-
-        //BOUNDING BOX
-//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-//        shapeRenderer.setColor(Color.BLUE);
-//        shapeRenderer.circle(player.x + 16f, player.y + 16f, 200f);
-//        for (int ang = 0; ang < 360; ang += 5) {
-//            shapeRenderer.line(
-//                    player.x + 16f, player.y + 16f,
-//                    player.x + 16f + (float) (200f * Math.cos(Math.toRadians(ang))),
-//                    player.y + 16f + (float) (200f * Math.sin(Math.toRadians(ang)))
-//            );
-//        }
-//        shapeRenderer.end();
-//        world.lightRenderer.render(shapeRenderer);
     }
 }

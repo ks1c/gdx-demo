@@ -25,16 +25,12 @@ public class World {
     private MapObjects entities;
     private float width, height;
     private final Player player;
-    private LightRenderer lightRenderer;
-    private final Sprite bg;
 
     public World(Player player) {
 
         tiledMap = null;
         mapRenderer = new OrthogonalTiledMapRenderer(null);
         this.player = player;
-        lightRenderer = new LightRenderer();
-        bg = new Sprite(new Texture("bg.png"));
     }
 
     public void loadTiledMap(String mapName) {
@@ -182,26 +178,10 @@ public class World {
         player.oldPos.y = player.y;
         oldCamPos.x = camPos.x;
         oldCamPos.y = camPos.y;
-
-        for (MapObject entity : entities) {
-            RectangleMapObject e = (RectangleMapObject) entity;
-            if (e.getProperties().get("type").toString().equals("light") &&
-                    player.getLightZone().overlaps(e.getRectangle())) {
-                //lightRenderer.addLights(new Light(e.getRectangle().getCenter(new Vector2()), 500f));
-            }
-        }
     }
 
-    public void render(OrthographicCamera cam, SpriteBatch batch) {
-        batch.begin();
-        batch.draw(bg, cam.position.x - bg.getWidth() / 2f, cam.position.y - bg.getHeight() / 2f);
-        batch.end();
+    public void render(OrthographicCamera cam) {
         mapRenderer.setView(cam);
         mapRenderer.render();
-    }
-
-    public void renderLights(ShapeRenderer shapeRenderer, Vector3 camPos) {
-        lightRenderer.addLights(new Light(player.getCenter(new Vector2()), 400f));
-        lightRenderer.render(shapeRenderer, camPos);
     }
 }

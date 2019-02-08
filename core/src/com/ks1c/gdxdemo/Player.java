@@ -42,15 +42,6 @@ public class Player extends Rectangle {
     public void init() {
     }
 
-    public Rectangle getLightZone() {
-
-        lightZone.setCenter(getCenter(new Vector2()));
-
-        lightZone.setSize(GdxDemo.GAME_WIDTH + Light.MAX_RADIUS, GdxDemo.GAME_HEIGHT + Light.MAX_RADIUS);
-
-        return lightZone;
-    }
-
     public void fall(float G, Vector3 camPos, float worldHeight) {
 
         setInTheAir(true);
