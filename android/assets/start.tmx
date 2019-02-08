@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="2018.11.29" orientation="orthogonal" renderorder="left-up" width="600" height="340" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="464">
+<map version="1.2" tiledversion="2018.11.29" orientation="orthogonal" renderorder="left-up" width="600" height="340" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="465">
  <properties>
   <property name="origin" value="start"/>
  </properties>
@@ -17,9 +17,6 @@
   </data>
  </layer>
  <objectgroup id="2" name="entities">
-  <object id="427" name="start" type="waypoint" x="9568" y="4096">
-   <point/>
-  </object>
   <object id="428" name="light" type="staticLight" x="9184" y="6400">
    <properties>
     <property name="Color" type="color" value="#ff0000ff"/>
@@ -99,6 +96,9 @@
    <properties>
     <property name="Color" type="color" value="#ffaaff00"/>
    </properties>
+   <point/>
+  </object>
+  <object id="464" name="start" type="waypoint" x="9472" y="6272">
    <point/>
   </object>
  </objectgroup>
