@@ -19,6 +19,7 @@ public class GameScreen extends GenericScreen {
     private final World world;
     private final Player player;
     private final Vector2 oldCamPos;
+    private final Vector2 camPosMin, camPosMax;
 
 
     public GameScreen(GdxDemo game) {
@@ -26,6 +27,8 @@ public class GameScreen extends GenericScreen {
         player = new Player();
         world = new World(player);
         oldCamPos = new Vector2();
+        camPosMin = new Vector2();
+        camPosMax = new Vector2();
     }
 
     @Override
@@ -54,15 +57,17 @@ public class GameScreen extends GenericScreen {
 
         //HORIZONTAL
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            player.moveLeft(cam.position, world.getWidth());
+            //player.moveLeft(cam.position, world.getWidth());
+            player.setPosition(player.getX() - 2f, player.getY());
         } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            player.moveRight(cam.position, world.getWidth());
+            //player.moveRight(cam.position, world.getWidth());
+            player.setPosition(player.getX() + 2f, player.getY());
         }
 
         world.update(cam.position, oldCamPos);
         player.update();
         world.stepLighting();
-        cam.update();
+        updateCamPosition();
     }
 
     @Override
@@ -79,6 +84,58 @@ public class GameScreen extends GenericScreen {
     public void renderForeGroundTiles() {
         //world.render(cam);
         world.renderLighting(cam);
+    }
+
+    private void updateCamPosition() {
+
+        Vector2 displacement = new Vector2(5f, 5f);
+
+        camPosMin.set(
+                GdxDemo.GAME_WIDTH / 2f,
+                GdxDemo.GAME_HEIGHT / 2f
+        );
+        camPosMax.set(
+                world.getWidth() - GdxDemo.GAME_WIDTH / 2f,
+                world.getHeight() - GdxDemo.GAME_HEIGHT / 2f
+        );
+
+        if (cam.position.x < player.getX() + player.getWidth() / 2f) {
+            cam.position.x += displacement.x;
+            if (cam.position.x > player.getX() + player.getWidth() / 2f) {
+                cam.position.x = player.getX() + player.getWidth() / 2f;
+            }
+            if (cam.position.x > camPosMax.x) {
+                cam.position.x = camPosMax.x;
+            }
+        }
+        if (cam.position.x > player.getX() + player.getWidth() / 2f) {
+            cam.position.x -= displacement.x;
+            if (cam.position.x < player.getX() + player.getWidth() / 2f) {
+                cam.position.x = player.getX() + player.getWidth() / 2f;
+            }
+            if (cam.position.x < camPosMin.x) {
+                cam.position.x = camPosMin.x;
+            }
+        }
+        if (cam.position.y < player.getY() + player.getHeight() / 2f) {
+            cam.position.y += displacement.y;
+            if (cam.position.y > player.getY() + player.getHeight() / 2f) {
+                cam.position.y = player.getY() + player.getHeight() / 2f;
+            }
+            if (cam.position.y > camPosMax.y) {
+                cam.position.y = camPosMax.y;
+            }
+        }
+        if (cam.position.y > player.getY() + player.getHeight() / 2f) {
+            cam.position.y -= displacement.y;
+            if (cam.position.y < player.getY() + player.getHeight() / 2f) {
+                cam.position.y = player.getY() + player.getHeight() / 2f;
+            }
+            if (cam.position.y < camPosMin.y) {
+                cam.position.y = camPosMin.y;
+            }
+        }
+        cam.update();
     }
 
     private void setCameraAndPlayerPosition() {

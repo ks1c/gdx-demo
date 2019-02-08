@@ -157,7 +157,7 @@ public class World {
                                 tmpPlayer.overlaps(e.getRectangle())) {
                             tmpPlayer.x -= 1;
                             if (camPos.x > oldCamPos.x) {
-                                camPos.x -= 1;
+                                //camPos.x -= 1;
                             }
                         }
                     }
@@ -172,7 +172,7 @@ public class World {
                                 tmpPlayer.overlaps(e.getRectangle())) {
                             tmpPlayer.x += 1;
                             if (camPos.x < oldCamPos.x) {
-                                camPos.x += 1;
+                                //camPos.x += 1;
                             }
                         }
                     }
