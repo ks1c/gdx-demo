@@ -48,7 +48,7 @@ public class Player extends Rectangle {
     public void init() {
     }
 
-    public void fall(float G, Vector3 camPos, float worldHeight) {
+    public void fall(float G) {
 
         setInTheAir(true);
 

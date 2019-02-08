@@ -18,15 +18,12 @@ public class GameScreen extends GenericScreen {
 
     private final World world;
     private final Player player;
-    private final Vector2 oldCamPos;
     private final Vector2 camPosMin, camPosMax;
-
 
     public GameScreen(GdxDemo game) {
         super(game);
         player = new Player();
         world = new World(player);
-        oldCamPos = new Vector2();
         camPosMin = new Vector2();
         camPosMax = new Vector2();
     }
@@ -62,7 +59,7 @@ public class GameScreen extends GenericScreen {
             player.moveRight();
         }
 
-        world.update(cam.position, oldCamPos);
+        world.update();
         player.update();
         world.stepLighting();
         updateCamPosition();

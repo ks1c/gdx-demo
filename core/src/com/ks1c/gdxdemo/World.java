@@ -92,9 +92,9 @@ public class World {
         return tiledMap.getProperties().get("origin").toString();
     }
 
-    public void update(Vector3 camPos, Vector2 oldCamPos) {
+    public void update() {
 
-        player.fall(G, camPos, getHeight());
+        player.fall(G);
 
         Vector2 playerSteps = new Vector2(
                 Math.abs(player.x - player.oldPos.x),
