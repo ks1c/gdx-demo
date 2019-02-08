@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="left-up" width="600" height="340" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="424">
+<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="left-up" width="600" height="340" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="427">
  <properties>
   <property name="origin" value="start"/>
  </properties>
@@ -53,5 +53,23 @@
   <object id="421" type="staticBody" x="416" y="10624" width="32" height="32"/>
   <object id="422" type="staticBody" x="480" y="10624" width="32" height="32"/>
   <object id="423" type="staticBody" x="544" y="10624" width="32" height="32"/>
+  <object id="424" name="light" type="staticLight" x="736" y="10464">
+   <properties>
+    <property name="Color" type="color" value="#ffaaff00"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="425" name="light" type="staticLight" x="96" y="10624">
+   <properties>
+    <property name="Color" type="color" value="#ffff0000"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="426" name="light" type="staticLight" x="1184" y="10464">
+   <properties>
+    <property name="Color" type="color" value="#ffff00ff"/>
+   </properties>
+   <point/>
+  </object>
  </objectgroup>
 </map>
