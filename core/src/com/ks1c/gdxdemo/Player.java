@@ -54,10 +54,10 @@ public class Player extends Rectangle {
 
         if (G - jumpStep > 0) {
             displacement.y = G - jumpStep;
-            moveDown(camPos, worldHeight);
+            moveDown();
         } else {
             displacement.y = jumpStep - G;
-            moveUp(camPos, worldHeight);
+            moveUp();
         }
 
         if (jumpStep > 0) {
@@ -96,58 +96,14 @@ public class Player extends Rectangle {
         addToX(-displacement.x);
     }
 
-    public void moveUp(Vector3 camPos, float worldHeight) {
+    public void moveUp() {
 
-        float camPosYMax = worldHeight - GdxDemo.GAME_HEIGHT / 2f;
-
-        if (camPos.y < camPosYMax) {
-            if (getYOnScreen(camPos) < DEAD_ZONE.y) {
-                addToY(displacement.y);
-                if (getYOnScreen(camPos) > DEAD_ZONE.y) {
-                    y = DEAD_ZONE.y;
-                }
-            } else {
-                if (camPos.y + displacement.y < camPosYMax) {
-                    addToY(displacement.y);
-                    camPos.add(0, displacement.y, 0);
-                } else {
-                    addToY(camPosYMax - camPos.y);
-                    camPos.add(0, camPosYMax - camPos.y, 0);
-                }
-            }
-        } else {
-            addToY(displacement.y);
-            if (y + height > worldHeight) {
-                y = worldHeight - height;
-            }
-        }
+        addToY(displacement.y);
     }
 
-    public void moveDown(Vector3 camPos, float worldHeight) {
+    public void moveDown() {
 
-        float camPosYMin = GdxDemo.GAME_HEIGHT / 2f;
-
-        if (camPos.y > camPosYMin) {
-            if (getYOnScreen(camPos) > DEAD_ZONE.y) {
-                addToY(-displacement.y);
-                if (getYOnScreen(camPos) < DEAD_ZONE.y) {
-                    y = worldHeight - (DEAD_ZONE.y + DEAD_ZONE.height);
-                }
-            } else {
-                if (camPos.y - displacement.y > camPosYMin) {
-                    addToY(-displacement.y);
-                    camPos.add(0, -displacement.y, 0);
-                } else {
-                    addToY(-(camPos.y - camPosYMin));
-                    camPos.add(0, -(camPos.y - camPosYMin), 0);
-                }
-            }
-        } else {
-            addToY(-displacement.y);
-            if (y < 0) {
-                y = 0;
-            }
-        }
+        addToY(-displacement.y);
     }
 
     public void render(SpriteBatch batch) {

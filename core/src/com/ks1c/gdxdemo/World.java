@@ -120,9 +120,6 @@ public class World {
                         if (e.getProperties().get("type").toString().equals("staticBody") &&
                                 tmpPlayer.overlaps(e.getRectangle())) {
                             tmpPlayer.y += 1;
-                            if (camPos.y < oldCamPos.y) {
-                                camPos.y += 1;
-                            }
                             player.setInTheAir(false);
                         }
                     }
@@ -136,9 +133,6 @@ public class World {
                         if (e.getProperties().get("type").toString().equals("staticBody") &&
                                 tmpPlayer.overlaps(e.getRectangle())) {
                             tmpPlayer.y -= 1;
-                            if (camPos.y > oldCamPos.y) {
-                                camPos.y -= 1;
-                            }
                         }
                     }
                 }
@@ -156,9 +150,6 @@ public class World {
                         if (e.getProperties().get("type").toString().equals("staticBody") &&
                                 tmpPlayer.overlaps(e.getRectangle())) {
                             tmpPlayer.x -= 1;
-                            if (camPos.x > oldCamPos.x) {
-                                //camPos.x -= 1;
-                            }
                         }
                     }
                 }
@@ -171,9 +162,6 @@ public class World {
                         if (e.getProperties().get("type").toString().equals("staticBody") &&
                                 tmpPlayer.overlaps(e.getRectangle())) {
                             tmpPlayer.x += 1;
-                            if (camPos.x < oldCamPos.x) {
-                                //camPos.x += 1;
-                            }
                         }
                     }
                 }
@@ -189,8 +177,6 @@ public class World {
 
         player.oldPos.x = player.x;
         player.oldPos.y = player.y;
-        oldCamPos.x = camPos.x;
-        oldCamPos.y = camPos.y;
     }
 
     public void render(OrthographicCamera cam) {

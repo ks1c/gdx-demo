@@ -86,7 +86,7 @@ public class GameScreen extends GenericScreen {
 
     private void updateCamPosition() {
 
-        Vector2 displacement = new Vector2(5f, 5f);
+        Vector2 displacement = new Vector2(100f, 100f);
 
         camPosMin.set(
                 GdxDemo.GAME_WIDTH / 2f,
