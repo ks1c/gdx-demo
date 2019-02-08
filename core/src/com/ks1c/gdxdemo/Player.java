@@ -1,5 +1,6 @@
 package com.ks1c.gdxdemo;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,6 +18,8 @@ public class Player extends Rectangle {
     static final public float HEIGHT = 32;
 
     private Vector2 displacement;
+    private Vector2 maxVel, minVel, vel;
+    private float velCount, velCountMax = 2;
 
     public Vector2 oldPos;
 
@@ -42,6 +45,9 @@ public class Player extends Rectangle {
         super(0, 0, WIDTH, HEIGHT);
         sprite = new Sprite(new Texture("player.png"));
         displacement = new Vector2(2f, 10f);
+        maxVel = new Vector2(1, 0);
+        minVel = new Vector2(-2, 0);
+        vel = new Vector2();
         oldPos = new Vector2();
     }
 
@@ -86,14 +92,48 @@ public class Player extends Rectangle {
         this.inTheAir = inTheAir;
     }
 
+    public float getJumpHeight() {
+
+        float jumpStepTmp = MAX_JUMP_STEP;
+
+        float jumpHeight = 0;
+
+        while (jumpStepTmp > 0) {
+
+            if (World.G - jumpStepTmp <= 0) {
+                jumpHeight += (jumpStepTmp - World.G);
+            }
+            jumpStepTmp -= 1;
+        }
+
+        return jumpHeight;
+    }
+
     public void moveRight() {
 
-        addToX(displacement.x);
+        if (vel.x < 0) {
+            vel.x = 0;
+        }
+        if (velCount >= velCountMax) {
+//            if (vel.x < maxVel.x) {
+//                vel.x += 1;
+//            }
+            velCount = 0;
+            addToX(1);
+        }
+        velCount++;
     }
 
     public void moveLeft() {
 
-        addToX(-displacement.x);
+        velCount = 0;
+        if (vel.x > 0) {
+            vel.x = 0;
+        }
+        if (vel.x > minVel.x) {
+            vel.x--;
+        }
+        addToX(vel.x);
     }
 
     public void moveUp() {
@@ -143,6 +183,7 @@ public class Player extends Rectangle {
                 (y + height / 2f) / World.PIXELS_TO_METERS,
                 bodyOfLights.getAngle()
         );
+        DMsg.show(velCount + "");
     }
 
     public void setBodyOfLights(com.badlogic.gdx.physics.box2d.World worldOfLights) {
