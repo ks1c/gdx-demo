@@ -64,8 +64,8 @@ public class GameScreen extends GenericScreen {
             reset();
         }
 
-        world.update();
         player.update();
+        world.update();
         world.stepLighting();
         updateCamPosition();
     }
@@ -132,5 +132,24 @@ public class GameScreen extends GenericScreen {
         player.oldPos.y = player.y;
         cam.position.x = player.x + player.width / 2f;
         cam.position.y = player.y + player.height / 2f;
+    }
+
+    @Override
+    public void renderShapes() {
+//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//        shapeRenderer.setColor(Color.BLACK);
+//        shapeRenderer.line(0, 32 + 91, GdxDemo.GAME_WIDTH, 32 + 91);
+//        shapeRenderer.end();
+
+//        //DEAD_ZONE
+//        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+//        shapeRenderer.setColor(Color.BLACK);
+//        shapeRenderer.rect(updateX(0), updateY(Player.DEAD_ZONE.y), GdxDemo.GAME_WIDTH, Player.DEAD_ZONE.height);
+//        shapeRenderer.rect(updateX(Player.DEAD_ZONE.x), updateY(0), Player.DEAD_ZONE.width, GdxDemo.GAME_HEIGHT);
+//
+//        //BOUNDING BOX
+//        shapeRenderer.setColor(Color.BLUE);
+//        shapeRenderer.rect(player.x, player.y, Player.WIDTH, Player.HEIGHT);
+//        shapeRenderer.end();
     }
 }
