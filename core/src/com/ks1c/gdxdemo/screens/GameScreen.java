@@ -39,7 +39,7 @@ public class GameScreen extends GenericScreen {
             game.saveGame.setWaypoint(world.getOrigin());
             game.saveGame.saveFile();
         }
-        setCameraAndPlayerPosition();
+        setPlayerPosition();
         world.initLighting();
     }
 
@@ -59,10 +59,16 @@ public class GameScreen extends GenericScreen {
             player.moveRight();
         }
 
+        //RESET
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+            reset();
+        }
+
         world.update();
         player.update();
         world.stepLighting();
         updateCamPosition();
+        DMsg.show(player.x + " " + player.y + " " + cam.position.x + " " + cam.position.y);
     }
 
     @Override
@@ -79,6 +85,10 @@ public class GameScreen extends GenericScreen {
     public void renderForeGroundTiles() {
         //world.render(cam);
         world.renderLighting(cam);
+    }
+
+    private void reset() {
+        setPlayerPosition();
     }
 
     private void updateCamPosition() {
@@ -133,38 +143,14 @@ public class GameScreen extends GenericScreen {
         cam.update();
     }
 
-    private void setCameraAndPlayerPosition() {
-
-        Vector2 camPos = new Vector2();
+    private void setPlayerPosition() {
 
         Vector2 origin = world.getEntity(game.saveGame.getWaypoint()).getRectangle().getCenter(new Vector2());
 
-        //ZERA CAMERA
-        camPos.add(-GdxDemo.GAME_WIDTH / 2f, -GdxDemo.GAME_HEIGHT / 2f);
-
-        if (origin.x < GdxDemo.GAME_WIDTH / 2f) {
-            camPos.add(GdxDemo.GAME_WIDTH / 2f, 0);
-
-        } else if (origin.x > world.getWidth() - GdxDemo.GAME_WIDTH / 2f) {
-            camPos.add(world.getWidth() - GdxDemo.GAME_WIDTH / 2f, 0);
-
-        } else {
-            camPos.add(origin.x, 0);
-        }
-
-        if (origin.y > world.getHeight() - GdxDemo.GAME_HEIGHT / 2f) {
-            camPos.add(0, world.getHeight() - GdxDemo.GAME_HEIGHT / 2f);
-
-        } else if (origin.y < GdxDemo.GAME_HEIGHT / 2f) {
-            camPos.add(0, GdxDemo.GAME_HEIGHT / 2f);
-
-        } else {
-            camPos.add(0, origin.y);
-        }
-
-        cam.translate(camPos);
         player.setCenter(origin);
         player.oldPos.x = player.x;
         player.oldPos.y = player.y;
+        cam.position.x = player.x + player.width / 2f;
+        cam.position.y = player.y + player.height / 2f;
     }
 }
