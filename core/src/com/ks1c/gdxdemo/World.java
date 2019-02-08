@@ -31,7 +31,7 @@ public class World {
     static final float G = 10;
     private final OrthogonalTiledMapRenderer mapRenderer;
     private MapObjects entities;
-    private float width, height;
+    private float width, height, tileSize;
     private final Player player;
 
     //BOX2D AND BOX2DLIGHTS
@@ -53,8 +53,9 @@ public class World {
         entities = tiledMap.getLayers().get("entities").getObjects();
 
         TiledMapTileLayer layer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
-        width = layer.getWidth() * layer.getTileWidth();
-        height = layer.getHeight() * layer.getTileHeight();
+        tileSize = layer.getTileWidth();
+        width = layer.getWidth() * tileSize;
+        height = layer.getHeight() * tileSize;
     }
 
     public RectangleMapObject getEntity(String name) {
@@ -85,6 +86,10 @@ public class World {
 
     public float getHeight() {
         return height;
+    }
+
+    public float getTileSize() {
+        return tileSize;
     }
 
     public String getOrigin() {
@@ -191,7 +196,7 @@ public class World {
         );
         player.setBodyOfLights(worldOfLights);
         rayHandler = new RayHandler(worldOfLights);
-        rayHandler.setAmbientLight(0, 0, 0, 0);
+        rayHandler.setAmbientLight(0, 0, 0, 1);
         rayHandler.setBlurNum(3);
         rayHandler.setShadows(true);
 
