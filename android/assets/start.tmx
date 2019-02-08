@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="2018.11.29" orientation="orthogonal" renderorder="left-up" width="600" height="340" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="503">
+<map version="1.2" tiledversion="2018.11.29" orientation="orthogonal" renderorder="left-up" width="600" height="340" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="514">
  <properties>
   <property name="origin" value="start"/>
  </properties>
@@ -13,174 +13,25 @@
  </tileset>
  <layer id="1" name="layer0" width="600" height="340">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <objectgroup id="2" name="entities">
-  <object id="428" name="light" type="staticLight" x="9184" y="6400">
-   <properties>
-    <property name="Color" type="color" value="#ff0000ff"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="429" type="staticBody" x="8736" y="5024" width="32" height="1536"/>
-  <object id="430" type="staticBody" x="8768" y="6528" width="2016" height="32"/>
-  <object id="431" type="staticBody" x="8928" y="6496" width="128" height="32"/>
-  <object id="432" type="staticBody" x="8768" y="6432" width="32" height="96"/>
-  <object id="433" type="staticBody" x="8800" y="6496" width="32" height="32"/>
-  <object id="434" type="staticBody" x="8992" y="6464" width="32" height="32"/>
-  <object id="435" type="staticBody" x="9088" y="6304" width="32" height="32"/>
-  <object id="436" type="staticBody" x="9248" y="6496" width="384" height="32"/>
-  <object id="437" type="staticBody" x="9280" y="6464" width="320" height="32"/>
-  <object id="438" type="staticBody" x="9312" y="6432" width="288" height="32"/>
-  <object id="439" type="staticBody" x="9344" y="6400" width="224" height="32"/>
-  <object id="440" type="staticBody" x="9376" y="6368" width="192" height="32"/>
-  <object id="441" type="staticBody" x="9408" y="6336" width="128" height="32"/>
-  <object id="442" type="staticBody" x="9440" y="6304" width="64" height="32"/>
-  <object id="443" type="staticBody" x="9728" y="6496" width="256" height="32"/>
-  <object id="444" type="staticBody" x="9760" y="6464" width="192" height="32"/>
-  <object id="445" type="staticBody" x="9792" y="6432" width="160" height="32"/>
-  <object id="446" type="staticBody" x="9792" y="6400" width="128" height="32"/>
-  <object id="447" type="staticBody" x="9824" y="6368" width="96" height="32"/>
-  <object id="448" type="staticBody" x="9824" y="6336" width="64" height="32"/>
-  <object id="449" type="staticBody" x="9824" y="6304" width="64" height="32"/>
-  <object id="450" type="staticBody" x="9824" y="6240" width="32" height="64"/>
-  <object id="451" type="staticBody" x="10048" y="6496" width="64" height="32"/>
-  <object id="452" type="staticBody" x="10144" y="6496" width="64" height="32"/>
-  <object id="453" type="staticBody" x="9152" y="6304" width="32" height="32"/>
-  <object id="454" type="staticBody" x="9216" y="6304" width="32" height="32"/>
-  <object id="455" type="staticBody" x="9280" y="6304" width="32" height="32"/>
-  <object id="456" name="light" type="staticLight" x="9472" y="6144">
-   <properties>
-    <property name="Color" type="color" value="#ffaaff00"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="457" name="light" type="staticLight" x="8832" y="6304">
-   <properties>
-    <property name="Color" type="color" value="#ffff0000"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="458" name="light" type="staticLight" x="9920" y="6144">
-   <properties>
-    <property name="Color" type="color" value="#ffff00ff"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="459" name="light" type="staticLight" x="9376" y="5696">
-   <properties>
-    <property name="Color" type="color" value="#ffaaff00"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="460" name="light" type="staticLight" x="9472" y="5312">
-   <properties>
-    <property name="Color" type="color" value="#ffaaff00"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="461" name="light" type="staticLight" x="9504" y="4960">
-   <properties>
-    <property name="Color" type="color" value="#ffaaff00"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="462" name="light" type="staticLight" x="9568" y="4544">
-   <properties>
-    <property name="Color" type="color" value="#ffaaff00"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="463" name="light" type="staticLight" x="9504" y="4224">
-   <properties>
-    <property name="Color" type="color" value="#ffaaff00"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="466" name="light" type="staticLight" x="448" y="10720">
-   <properties>
-    <property name="Color" type="color" value="#ff0000ff"/>
-   </properties>
-   <point/>
-  </object>
   <object id="467" type="staticBody" x="0" y="9344" width="32" height="1536"/>
   <object id="468" type="staticBody" x="32" y="10848" width="2016" height="32"/>
-  <object id="469" type="staticBody" x="192" y="10816" width="128" height="32"/>
-  <object id="470" type="staticBody" x="32" y="10752" width="32" height="96"/>
-  <object id="471" type="staticBody" x="64" y="10816" width="32" height="32"/>
-  <object id="472" type="staticBody" x="256" y="10784" width="32" height="32"/>
-  <object id="473" type="staticBody" x="352" y="10624" width="32" height="32"/>
-  <object id="474" type="staticBody" x="512" y="10816" width="384" height="32"/>
-  <object id="475" type="staticBody" x="544" y="10784" width="320" height="32"/>
-  <object id="476" type="staticBody" x="576" y="10752" width="288" height="32"/>
-  <object id="477" type="staticBody" x="608" y="10720" width="224" height="32"/>
-  <object id="478" type="staticBody" x="640" y="10688" width="192" height="32"/>
-  <object id="479" type="staticBody" x="672" y="10656" width="128" height="32"/>
-  <object id="480" type="staticBody" x="704" y="10624" width="64" height="32"/>
-  <object id="481" type="staticBody" x="992" y="10816" width="256" height="32"/>
-  <object id="482" type="staticBody" x="1024" y="10784" width="192" height="32"/>
-  <object id="483" type="staticBody" x="1056" y="10752" width="160" height="32"/>
-  <object id="484" type="staticBody" x="1056" y="10720" width="128" height="32"/>
-  <object id="485" type="staticBody" x="1088" y="10688" width="96" height="32"/>
-  <object id="486" type="staticBody" x="1088" y="10656" width="64" height="32"/>
-  <object id="487" type="staticBody" x="1088" y="10624" width="64" height="32"/>
-  <object id="488" type="staticBody" x="1088" y="10560" width="32" height="64"/>
-  <object id="489" type="staticBody" x="1312" y="10816" width="64" height="32"/>
-  <object id="490" type="staticBody" x="1408" y="10816" width="64" height="32"/>
-  <object id="491" type="staticBody" x="416" y="10624" width="32" height="32"/>
-  <object id="492" type="staticBody" x="480" y="10624" width="32" height="32"/>
-  <object id="493" type="staticBody" x="544" y="10624" width="32" height="32"/>
-  <object id="494" name="light" type="staticLight" x="736" y="10464">
-   <properties>
-    <property name="Color" type="color" value="#ffaaff00"/>
-   </properties>
+  <object id="502" name="start" type="waypoint" x="128" y="10784">
    <point/>
   </object>
-  <object id="495" name="light" type="staticLight" x="96" y="10624">
-   <properties>
-    <property name="Color" type="color" value="#ffff0000"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="496" name="light" type="staticLight" x="1184" y="10464">
-   <properties>
-    <property name="Color" type="color" value="#ffff00ff"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="497" name="light" type="staticLight" x="640" y="10016">
-   <properties>
-    <property name="Color" type="color" value="#ffaaff00"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="498" name="light" type="staticLight" x="736" y="9632">
-   <properties>
-    <property name="Color" type="color" value="#ffaaff00"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="499" name="light" type="staticLight" x="768" y="9280">
-   <properties>
-    <property name="Color" type="color" value="#ffaaff00"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="500" name="light" type="staticLight" x="832" y="8864">
-   <properties>
-    <property name="Color" type="color" value="#ffaaff00"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="501" name="light" type="staticLight" x="768" y="8544">
-   <properties>
-    <property name="Color" type="color" value="#ffaaff00"/>
-   </properties>
-   <point/>
-  </object>
-  <object id="502" name="start" type="waypoint" x="768" y="8256">
-   <point/>
-  </object>
+  <object id="503" type="staticBody" x="352" y="10752" width="32" height="32"/>
+  <object id="504" type="staticBody" x="608" y="10752" width="32" height="32"/>
+  <object id="505" type="staticBody" x="640" y="10752" width="32" height="32"/>
+  <object id="506" type="staticBody" x="640" y="10720" width="32" height="32"/>
+  <object id="507" type="staticBody" x="832" y="10752" width="32" height="32"/>
+  <object id="508" type="staticBody" x="1056" y="10752" width="32" height="32"/>
+  <object id="509" type="staticBody" x="1088" y="10720" width="32" height="32"/>
+  <object id="510" type="staticBody" x="1248" y="10752" width="32" height="32"/>
+  <object id="511" type="staticBody" x="1344" y="10752" width="32" height="32"/>
+  <object id="512" type="staticBody" x="1632" y="10752" width="32" height="32"/>
+  <object id="513" type="staticBody" x="1824" y="10752" width="32" height="32"/>
  </objectgroup>
 </map>
