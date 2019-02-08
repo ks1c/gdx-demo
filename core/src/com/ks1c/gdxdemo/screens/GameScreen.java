@@ -57,11 +57,9 @@ public class GameScreen extends GenericScreen {
 
         //HORIZONTAL
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            //player.moveLeft(cam.position, world.getWidth());
-            player.setPosition(player.getX() - 2f, player.getY());
+            player.moveLeft();
         } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            //player.moveRight(cam.position, world.getWidth());
-            player.setPosition(player.getX() + 2f, player.getY());
+            player.moveRight();
         }
 
         world.update(cam.position, oldCamPos);

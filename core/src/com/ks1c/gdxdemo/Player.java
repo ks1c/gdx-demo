@@ -86,58 +86,14 @@ public class Player extends Rectangle {
         this.inTheAir = inTheAir;
     }
 
-    public void moveRight(Vector3 camPos, float worldWidth) {
+    public void moveRight() {
 
-        float camPosXMax = worldWidth - GdxDemo.GAME_WIDTH / 2f;
-
-        if (camPos.x < camPosXMax) {
-            if (getXOnScreen(camPos) < DEAD_ZONE.x) {
-                addToX(displacement.x);
-                if (getXOnScreen(camPos) > DEAD_ZONE.x) {
-                    x = DEAD_ZONE.x;
-                }
-            } else {
-                if (camPos.x + displacement.x < camPosXMax) {
-                    addToX(displacement.x);
-                    camPos.add(displacement.x, 0, 0);
-                } else {
-                    addToX(camPosXMax - camPos.x);
-                    camPos.add(camPosXMax - camPos.x, 0, 0);
-                }
-            }
-        } else {
-            addToX(displacement.x);
-            if (x + width > worldWidth) {
-                x = worldWidth - width;
-            }
-        }
+        addToX(displacement.x);
     }
 
-    public void moveLeft(Vector3 camPos, float worldWidth) {
+    public void moveLeft() {
 
-        float camPosXMin = GdxDemo.GAME_WIDTH / 2f;
-
-        if (camPos.x > camPosXMin) {
-            if (getXOnScreen(camPos) > DEAD_ZONE.x) {
-                addToX(-displacement.x);
-                if (getXOnScreen(camPos) < DEAD_ZONE.x) {
-                    x = worldWidth - (DEAD_ZONE.x + DEAD_ZONE.width);
-                }
-            } else {
-                if (camPos.x - displacement.x > camPosXMin) {
-                    addToX(-displacement.x);
-                    camPos.add(-displacement.x, 0, 0);
-                } else {
-                    addToX(-(camPos.x - camPosXMin));
-                    camPos.add(-(camPos.x - camPosXMin), 0, 0);
-                }
-            }
-        } else {
-            addToX(-displacement.x);
-            if (x < 0) {
-                x = 0;
-            }
-        }
+        addToX(-displacement.x);
     }
 
     public void moveUp(Vector3 camPos, float worldHeight) {
