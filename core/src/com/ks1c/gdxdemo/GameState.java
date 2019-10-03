@@ -8,11 +8,11 @@ import com.badlogic.gdx.utils.XmlWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 
-public class SaveGame {
+public class GameState {
 
     private XmlReader.Element root, world;
 
-    public SaveGame() {
+    public GameState() {
 
         StringWriter writer = new StringWriter();
         XmlWriter xmlWriter = new XmlWriter(writer);

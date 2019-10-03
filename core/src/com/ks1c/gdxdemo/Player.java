@@ -178,33 +178,5 @@ public class Player extends Rectangle {
     }
 
     public void update() {
-        bodyOfLights.setTransform(
-                (x + width / 2f) / World.PIXELS_TO_METERS,
-                (y + height / 2f) / World.PIXELS_TO_METERS,
-                bodyOfLights.getAngle()
-        );
-        DMsg.show(velCount + "");
-    }
-
-    public void setBodyOfLights(com.badlogic.gdx.physics.box2d.World worldOfLights) {
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(
-                (x + width / 2f) / World.PIXELS_TO_METERS,
-                (y + height / 2f) / World.PIXELS_TO_METERS
-        );
-        bodyOfLights = worldOfLights.createBody(bodyDef);
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(
-                (width / 2f) / World.PIXELS_TO_METERS,
-                (height / 2f) / World.PIXELS_TO_METERS
-        );
-        FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = shape;
-        fixtureDef.density = 1f;
-        fixtureDef.isSensor = true;
-        bodyOfLights.setFixedRotation(true);
-        bodyOfLights.createFixture(fixtureDef);
-        shape.dispose();
     }
 }
